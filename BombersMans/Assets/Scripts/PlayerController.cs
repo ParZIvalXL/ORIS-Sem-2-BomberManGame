@@ -1,0 +1,84 @@
+﻿using System;
+using NUnit.Framework;
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody2D))]
+public class PlayerController : MonoBehaviour
+{
+    private string _playerNickname;
+
+    public string PlayerNickname
+    {
+        get => _playerNickname;
+
+        set
+        {
+            if (_playerNickname == null) return;
+            _playerNickname = value;
+        }
+    }
+
+    public float speed = 5f;
+    public float health = 100f;
+    private Rigidbody2D _rb;
+    private Vector2 direction = Vector2.zero;
+    [SerializeField] public GameObject[] Bombs;
+    public bool ControlLocked { get; set ; }
+    
+    public Vector2 GetIntPosition()
+    {
+        Vector2 curr = transform.position;
+        return new Vector2(Mathf.RoundToInt(curr.x), Mathf.RoundToInt(curr.y));
+    }
+
+    public void SpawnBomb(int index)
+    {
+        var spawnPosition = GetIntPosition();
+        var bomb = Instantiate(Bombs[index], spawnPosition, Quaternion.identity);
+        if (bomb.TryGetComponent<BombScript>(out var bombScript))
+        {
+            bombScript.name = _playerNickname;
+        }
+    }
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        Vector2 position = _rb.position;
+        Vector2 translation = speed * Time.fixedDeltaTime * direction;
+
+        _rb.MovePosition(position + translation);
+    }
+
+    public void SetDirection(Vector2 newDirection)
+    {
+        direction = newDirection;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Explosion")) {
+            // В случае попадания под взрыв
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        Debug.Log("taking damage " + health);
+        if (health <= 0)
+        {
+            OnDeathSequenceEnded();
+            // Вызов смерти
+        }
+    }
+    private void OnDeathSequenceEnded()
+    {
+        gameObject.SetActive(false);
+        // Вызов проверки состояния игры для текущего игрока (проиграл, причина смерти, победа, и т.д.)
+    }
+}
