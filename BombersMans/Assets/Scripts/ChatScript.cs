@@ -1,6 +1,7 @@
 using System;
 using System.Net.Sockets;
 using NetCode;
+using Newtonsoft.Json;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,10 +22,18 @@ public class ChatScript : MonoBehaviour
         
         public async void SendChatMessage()
         {
-            if(_inputField.text.Length == 0) return;
+            if (_inputField.text.Length == 0) return;
             
-            string playerMessage = _inputField.text;
-            await _gameClientScript.SendMessagesAsync(playerMessage);
+            var messageData = new MessagePackage
+            {
+                Sender = _gameClientScript.playerName,
+                Content = _inputField.text,
+                Type = nameof(MessagePackage)
+            };
+            var serializedMessage = JsonConvert.SerializeObject(messageData);
+            
+            await _gameClientScript.SendMessagesAsync(serializedMessage);
+            
             _inputField.text = "";
         }
 

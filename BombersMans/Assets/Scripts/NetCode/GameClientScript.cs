@@ -60,6 +60,7 @@ namespace NetCode
                         string messType = messageObject["Type"];
                         if (messType == "MessagePackage")
                         {
+                            Debug.Log("GotMessage");
                             MessagePackage messagePackage = JsonConvert.DeserializeObject<MessagePackage>(message);
                             ChatHolder.messages.Add(messagePackage.Content);
                             if(ChatScript.Instance != null)

@@ -50,13 +50,20 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        var horInp = Input.GetAxis("Horizontal");
-        var verInp = Input.GetAxis("Vertical");
-        if ((horInp != 0 || verInp != 0) && !_clientPlayerController.ControlLocked) 
-            _clientPlayerController.SetDirection(Vector2.up * verInp + Vector2.right * horInp);
-        else
-            _clientPlayerController.SetDirection(Vector2.zero);
+        if(!_clientPlayerController.ControlLocked){
+            var horInp = Input.GetAxis("Horizontal");
+            var verInp = Input.GetAxis("Vertical");
+            if ((horInp != 0 || verInp != 0) && !_clientPlayerController.ControlLocked)
+                _clientPlayerController.SetDirection(Vector2.up * verInp + Vector2.right * horInp);
+            else
+                _clientPlayerController.SetDirection(Vector2.zero);
 
-        if (Input.GetKeyDown(KeyCode.Space)) _clientPlayerController.SpawnBomb(0);
+            if (Input.GetKeyDown(KeyCode.Space)) _clientPlayerController.SpawnBomb(0);
+        }
+    }
+
+    public void ResetPlayerMovement()
+    {
+        _clientPlayerController.SetDirection(Vector2.zero);
     }
 }

@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     public void OpenChatWindow()
     {
+        InputManager.Instance.ResetPlayerMovement();
         OpenInterface(chatWindow);
     }
 
