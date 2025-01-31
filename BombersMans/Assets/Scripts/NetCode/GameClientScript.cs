@@ -58,18 +58,32 @@ namespace NetCode
                         string message = Encoding.UTF8.GetString(buffer, 0, receivedBytes);
                         var messageObject = JsonConvert.DeserializeObject<Dictionary<string, string>>(message);
                         string messType = messageObject["Type"];
-                        if (messType == "MessagePackage")
+                        Debug.Log(messType);
+
+                        switch (messType)
                         {
-                            Debug.Log("GotMessage");
-                            MessagePackage messagePackage = JsonConvert.DeserializeObject<MessagePackage>(message);
-                            ChatHolder.messages.Add(messagePackage.Content);
-                            if(ChatScript.Instance != null)
-                                ChatScript.Instance.CreateNewMessage(messagePackage.Content);
-                        }
-                        else if (messType == "PlayerPackage")
-                        {
-                            PlayerPackage playerPackage = JsonConvert.DeserializeObject<PlayerPackage>(message);
-                            Debug.Log($"{playerPackage.Nickname} переместился на координаты: {playerPackage.PositionX}, {playerPackage.PositionY}");
+                            case "MessagePackage":
+                            {
+                                Debug.Log("GotMessage");
+                                MessagePackage messagePackage = JsonConvert.DeserializeObject<MessagePackage>(message);
+                                ChatHolder.messages.Add(messagePackage.Content);
+                                Debug.Log(messagePackage.Content);
+                                if(ChatScript.Instance != null)
+                                    ChatScript.Instance.CreateNewMessage(messagePackage.Content);
+                                break;
+                            }
+                            case "PlayerPackage":
+                            {
+                                Debug.Log("GotPlayer");
+                                PlayerPackage playerPackage = JsonConvert.DeserializeObject<PlayerPackage>(message);
+                                Debug.Log($"{playerPackage.Nickname} переместился на координаты: {playerPackage.PositionX}, {playerPackage.PositionY}");
+                                break;
+                            }
+                            default:
+                            {
+                                Debug.Log("GotUnknownMessage");
+                                break;
+                            }
                         }
                     }
                 }

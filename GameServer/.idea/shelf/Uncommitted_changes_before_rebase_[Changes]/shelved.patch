@@ -1,0 +1,60 @@
+Index: GameServer/ServerObject.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System;\r\nusing System.Collections.Generic;\r\nusing System.Net;\r\nusing System.Net.Sockets;\r\nusing System.Text;\r\nusing System.Text.Json;\r\nusing System.Threading.Tasks;\r\nusing GameServer.Packages;\r\nusing Newtonsoft.Json;\r\nusing JsonSerializer = Newtonsoft.Json.JsonSerializer;\r\n\r\nclass Server\r\n{\r\n    private Socket listenerSocket;\r\n    private List<ClientHandler> clients = new List<ClientHandler>();\r\n    private readonly int port;\r\n\r\n    public Server(int port)\r\n    {\r\n        this.port = port;\r\n        listenerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);\r\n    }\r\n\r\n    public void Start()\r\n    {\r\n        try\r\n        {\r\n            listenerSocket.Bind(new IPEndPoint(IPAddress.Any, port));\r\n            listenerSocket.Listen(10);\r\n            Console.WriteLine($\"Сервер запущен на {IPAddress.Any}:{port}. Ожидание подключений...\");\r\n\r\n            while (true)\r\n            {\r\n                var clientSocket = listenerSocket.Accept();\r\n                var clientHandler = new ClientHandler(clientSocket, this);\r\n                clients.Add(clientHandler);\r\n                Task.Run(() => clientHandler.HandleClient());\r\n            }\r\n        }\r\n        catch (SocketException ex)\r\n        {\r\n            Console.WriteLine($\"Ошибка сокета: {ex.Message}\");\r\n        }\r\n        catch (Exception ex)\r\n        {\r\n            Console.WriteLine($\"Ошибка сервера: {ex.Message}\");\r\n        }\r\n        finally\r\n        {\r\n            Stop();\r\n        }\r\n    }\r\n\r\n    public void BroadcastMessage(object obj, ClientHandler sender)\r\n    {\r\n        var message = JsonConvert.SerializeObject(obj);\r\n\r\n        foreach (var client in clients)\r\n        {\r\n            if (client != sender)\r\n            {\r\n                try\r\n                {\r\n                    client.SendMessage(message);\r\n                }\r\n                catch\r\n                {\r\n                    clients.Remove(client);\r\n                    client.Disconnect();\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    public void RemoveClient(ClientHandler client)\r\n    {\r\n        clients.Remove(client);\r\n    }\r\n\r\n    public void Stop()\r\n    {\r\n        foreach (var client in clients)\r\n        {\r\n            client.Disconnect();\r\n        }\r\n        listenerSocket.Close();\r\n        Console.WriteLine(\"Сервер остановлен.\");\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/GameServer/ServerObject.cs b/GameServer/ServerObject.cs
+--- a/GameServer/ServerObject.cs	(revision 69122b774d93b623cbb218366c442df99fac0309)
++++ b/GameServer/ServerObject.cs	(date 1738331248014)
+@@ -44,7 +44,7 @@
+         catch (Exception ex)
+         {
+             Console.WriteLine($"Ошибка сервера: {ex.Message}");
+-        }
++        }   
+         finally
+         {
+             Stop();
+Index: ../BombersMans/Assets/NuGet.config.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>fileFormatVersion: 2\r\nguid: 283ca37ad84062b49af45ddd621f88b2
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/../BombersMans/Assets/NuGet.config.meta b/../BombersMans/Assets/NuGet.config.meta
+--- a/../BombersMans/Assets/NuGet.config.meta	(revision 69122b774d93b623cbb218366c442df99fac0309)
++++ b/../BombersMans/Assets/NuGet.config.meta	(date 1738331329172)
+@@ -1,2 +1,28 @@
+ fileFormatVersion: 2
+-guid: 283ca37ad84062b49af45ddd621f88b2
+\ No newline at end of file
++guid: 283ca37ad84062b49af45ddd621f88b2
++labels:
++- NuGetForUnity
++PluginImporter:
++  externalObjects: {}
++  serializedVersion: 3
++  iconMap: {}
++  executionOrder: {}
++  defineConstraints: []
++  isPreloaded: 0
++  isOverridable: 0
++  isExplicitlyReferenced: 0
++  validateReferences: 1
++  platformData:
++    Any:
++      enabled: 0
++      settings: {}
++    Editor:
++      enabled: 0
++      settings:
++        DefaultValueInitialized: true
++    WindowsStoreApps:
++      enabled: 0
++      settings: {}
++  userData: 
++  assetBundleName: 
++  assetBundleVariant: 

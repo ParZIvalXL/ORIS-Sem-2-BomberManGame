@@ -44,30 +44,27 @@ class Server
         catch (Exception ex)
         {
             Console.WriteLine($"Ошибка сервера: {ex.Message}");
-        }
+        }   
         finally
         {
             Stop();
         }
     }
 
-    public void BroadcastMessage(object obj, ClientHandler sender)
+    public void BroadcastMessage(object? obj, ClientHandler sender)
     {
         var message = JsonConvert.SerializeObject(obj);
 
         foreach (var client in clients)
         {
-            if (client != sender)
+            try
             {
-                try
-                {
-                    client.SendMessage(message);
-                }
-                catch
-                {
-                    clients.Remove(client);
-                    client.Disconnect();
-                }
+                client.SendMessage(message);
+            }
+            catch
+            {
+                clients.Remove(client);
+                client.Disconnect();
             }
         }
     }
