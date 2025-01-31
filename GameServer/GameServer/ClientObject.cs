@@ -32,7 +32,7 @@ class ClientHandler
             Console.WriteLine($"{clientName} подключился к игре.");
             var newClient = new MessagePackage
             {
-                Sender = clientName,
+                Sender = null,
                 Content = $"{clientName} подключился к игре",
                 Type = "MessagePackage"
             };
@@ -49,17 +49,30 @@ class ClientHandler
                     {
                         var messageObject = JsonConvert.DeserializeObject<Dictionary<string, string>>(mess);
                         string typeObj = messageObject["Type"];
-                        Console.WriteLine(typeObj);
-                        if (typeObj == "PlayerPackage")
-                        {   PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(mess);
-                            Console.WriteLine($"Игрок передвинулся: X={package.PositionX}, Y={package.PositionY}");
-                            server.BroadcastMessage(package, this);
-                        }
-                        else if (typeObj == "MessagePackage")
+                        switch (typeObj)
                         {
-                            MessagePackage? package = JsonConvert.DeserializeObject<MessagePackage>(mess);
-                            Console.WriteLine($"{package.Sender}: {package.Content}");
-                            server.BroadcastMessage(package, this);
+                            case "PlayerPackage":
+                            {
+                                PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(mess);
+                                Console.WriteLine($"Игрок передвинулся: X={package.PositionX}, Y={package.PositionY}");
+                                server.BroadcastMessage(package, this);
+                                break;
+                            }
+                            case "MessagePackage":
+                            {
+                                MessagePackage? package = JsonConvert.DeserializeObject<MessagePackage>(mess);
+                                Console.WriteLine($"{package.Sender}: {package.Content}");
+                                server.BroadcastMessage(package, this);
+                                break;
+                            }
+                            case "BombPackage":
+                            {
+                                break;
+                            }
+                            case "CurrentPackage":
+                            {
+                                break;
+                            }
                         }
                     }
                     catch (Exception e)

@@ -1,0 +1,13 @@
+{
+  "Maps":[
+    {
+      "Name":"Map1",
+      "Grid": [
+        ["Empty", "Empty", "Empty", "Empty"],
+        ["Empty", "Durable", "Durable", "Empty"],
+        ["Empty", "Durable", "Durable", "Empty"],
+        ["Empty", "Empty", "Empty", "Empty"]
+      ]
+    }
+  ]
+}

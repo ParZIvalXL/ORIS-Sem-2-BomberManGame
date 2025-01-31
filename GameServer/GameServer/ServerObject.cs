@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using GameServer;
 using GameServer.Packages;
 using Newtonsoft.Json;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
@@ -28,7 +29,7 @@ class Server
             listenerSocket.Bind(new IPEndPoint(IPAddress.Any, port));
             listenerSocket.Listen(10);
             Console.WriteLine($"Сервер запущен на {IPAddress.Any}:{port}. Ожидание подключений...");
-
+            Console.WriteLine(new CurrentSession("Maps.json"));
             while (true)
             {
                 var clientSocket = listenerSocket.Accept();
@@ -60,7 +61,6 @@ class Server
             try
             {
                 client.SendMessage(message);
-                Console.WriteLine("Сообщение отправлено всем клентам");
             }
             catch
             {
