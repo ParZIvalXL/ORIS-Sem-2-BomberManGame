@@ -88,9 +88,10 @@ namespace NetCode
             }
         }
         
-        public static void SendMessage(MessagePackage messagePackage)
+        private static void SendMessage(MessagePackage messagePackage)
         {
-            string message = messagePackage.Content;
+            var prefix = messagePackage.Sender == null ? messagePackage.Sender + ": " : "";
+            string message = prefix + messagePackage.Content;
             if(ChatScript.Instance != null)
                 ChatScript.Instance.CreateNewMessage(message);
         }

@@ -9,7 +9,8 @@ public static class ChatHolder
 
     public static void AddMessage(MessagePackage message)
     {
-        messages.Add(message.Content);
+        var prefix = message.Sender == null? message.Sender + ": " : "";
+        messages.Add(prefix + message.Content);
         UpdateAllMessages();
     }
     public static string UpdateAllMessages()

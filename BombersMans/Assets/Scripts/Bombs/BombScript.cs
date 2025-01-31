@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Linq;
 using NetCode;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class BombScript : MonoBehaviour
@@ -13,6 +15,8 @@ public class BombScript : MonoBehaviour
     public Vector2[] directions = new Vector2[4] {Vector2.up, Vector2.right, Vector2.down, Vector2.left};
     public float timeToExplode = 3;
     public float damage = 25;
+    [SerializeField] public AnimatedTile[] animatedExplosionTiles;
+    [SerializeField] public Tile[] explosionTiles;
 
     private void Start()
     {
@@ -24,21 +28,29 @@ public class BombScript : MonoBehaviour
         yield return new WaitForSeconds(timeToExplode);
         Explode();
     }
-    
-    
+
+
+
     private void Explode()
     {
         foreach (var direction in directions)
         {
             var hit = Physics2D.Raycast(transform.position, direction);
             var hitPos = hit.point;
-            hitPos.x = hit.point.x - 0.01f * hit.normal.x;
-            hitPos.y = hit.point.y - 0.01f * hit.normal.y;
+            hitPos.x = hit.point.x - 0.01f * hit.normal.x + 0.5f;
+            hitPos.y = hit.point.y - 0.01f * hit.normal.y + 0.5f;
+            if(!hit.collider.TryGetComponent(out Tilemap tilemap))
+                return;
+            
+            var bombPosOnTile = tilemap.WorldToCell(transform.position);
+            var hitPosOnTile = tilemap.WorldToCell(hitPos);
+            GameAnimationController.Instance.AnimateTileExplosion(hitPosOnTile, bombPosOnTile, explosionTiles, animatedExplosionTiles);
+            
+            
+            Debug.Log("layer: " + (hit.collider.gameObject.layer == LayerMask.NameToLayer("Breakable")) + hitPosOnTile + hit.collider.name);
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Breakable"))
             {
-                if(!hit.collider.TryGetComponent(out Tilemap tilemap))
-                    return;
-                tilemap.SetTile(tilemap.WorldToCell(hitPos), null);
+                tilemap.SetTile(tilemap.WorldToCell(hitPosOnTile), null);
                 // Собрать информацию о уничтоженном блоке и отправить на проверку серверу
             }
 
@@ -49,6 +61,7 @@ public class BombScript : MonoBehaviour
                     return;
                 playerController.TakeDamage(damage);
             }
+            
         }
         
         Destroy(gameObject);

@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GameController : MonoBehaviour
 {
     public Queue<Action> actions = new Queue<Action>();
+    [SerializeField] public Tilemap ActionTilemap;
     public static GameController Instance;
+    
     public void AddAction(Action action)
     {
         actions.Enqueue(action);
@@ -23,4 +26,5 @@ public class GameController : MonoBehaviour
             actions.Dequeue().Invoke();
         }
     }
+    
 }

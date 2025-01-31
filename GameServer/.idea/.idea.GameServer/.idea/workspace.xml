@@ -8,10 +8,91 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b8d803f-eda1-4368-a503-ddf856a2c5bb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/GameAnimationController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/GameAnimationController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UIGameOver.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UIGameOver.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Prefabs/Circle.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Prefabs/Circle.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Resources/PerformanceTestRunInfo.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Resources/PerformanceTestRunInfo.json.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Resources/PerformanceTestRunSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Resources/PerformanceTestRunSettings.json.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/BombScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Bombs/BombScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/BombScript.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Bombs/BombScript.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/ChatHolder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/ChatHolder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/ChatScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/ChatScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/ChatScript.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/ChatScript.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/GameController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UIChat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UIChat.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UIChat.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UIChat.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UIConnectScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UIConnectScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UIConnectScript.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UIConnectScript.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UILogin.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UILogin.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UILogin.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UILogin.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UIManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UIManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Settings/Renderer2D.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Settings/Renderer2D.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Settings/UniversalRP.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Settings/UniversalRP.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_0.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_0.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_1.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_1.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_2.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_2.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_29.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_29.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_3.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_3.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_30.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_30.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_31.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_31.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_32.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_32.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_33.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_33.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_34.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_34.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_35.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_35.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_36.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_36.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_37.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_37.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_38.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_38.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_39.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_39.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_4.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_4.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_40.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_40.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_41.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_41.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_42.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_42.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_43.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_43.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_44.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/Dungeon Tile Set_44.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/New Tile Palette.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/New Tile Palette.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/ClientObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ClientObject.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +101,13 @@
   </component>
   <component name="DpaMonitoringSettings">
     <option name="firstShow" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JSON File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -35,12 +123,12 @@
     &quot;assignee&quot;: &quot;ParZIvalXL&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ParZIvalXL/ORIS-Sem-2-BomberManGame.git",
-    "accountId": "93dc0cde-53cd-445c-86e1-73027b586603"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ParZIvalXL/ORIS-Sem-2-BomberManGame.git&quot;,
+    &quot;accountId&quot;: &quot;93dc0cde-53cd-445c-86e1-73027b586603&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="Toolset" />
   </component>
@@ -58,7 +146,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ClientFeatures&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -102,6 +190,8 @@
       <workItem from="1738129810635" duration="2694000" />
       <workItem from="1738229616141" duration="2576000" />
       <workItem from="1738234990802" duration="1349000" />
+      <workItem from="1738339464786" duration="8873000" />
+      <workItem from="1738353628996" duration="71000" />
     </task>
     <servers />
   </component>

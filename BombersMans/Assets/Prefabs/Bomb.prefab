@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8994453816077639140}
   - component: {fileID: 1516770052998690123}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.15471691, g: 0.15471691, b: 0.15471691, a: 1}
+  m_Sprite: {fileID: -8326107168590373913, guid: 44ee2180d65aed34ca87941f45c031b8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,3 +100,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95784745c49cbaa4f8dbb5f6e7052648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameTick: 0
+  type: 0
+  playerName: 
+  player: {fileID: 0}
+  directions:
+  - {x: 0, y: 1}
+  - {x: 1, y: 0}
+  - {x: 0, y: -1}
+  - {x: -1, y: 0}
+  timeToExplode: 3
+  damage: 25
+  animatedExplosionTiles:
+  - {fileID: 11400000, guid: b258f4d5ae6954847a834232138f3d2d, type: 2}
+  explosionTiles:
+  - {fileID: 11400000, guid: 93b7be1758b7f394aa307a3810edbb23, type: 2}

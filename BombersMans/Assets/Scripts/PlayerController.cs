@@ -79,6 +79,15 @@ public class PlayerController : MonoBehaviour
     private void OnDeathSequenceEnded()
     {
         gameObject.SetActive(false);
+        UIManager.Instance.ShowGameOver("Вы были убиты собственной бомбой... ", PlayerGameEndReason.DeadByHimself);
         // Вызов проверки состояния игры для текущего игрока (проиграл, причина смерти, победа, и т.д.)
     }
+}
+
+public enum PlayerGameEndReason
+{
+    Winner,
+    DeadByHimself,
+    DeadByEnemy,
+    Unknown
 }
