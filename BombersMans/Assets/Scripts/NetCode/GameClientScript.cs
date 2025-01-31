@@ -49,7 +49,7 @@ namespace NetCode
             try
             {
                 byte[] buffer = new byte[1024];
-
+                
                 while (true)
                 {
                     int receivedBytes = clientSocket.Receive(buffer);
@@ -58,30 +58,24 @@ namespace NetCode
                         string message = Encoding.UTF8.GetString(buffer, 0, receivedBytes);
                         var messageObject = JsonConvert.DeserializeObject<Dictionary<string, string>>(message);
                         string messType = messageObject["Type"];
-                        Debug.Log(messType);
 
                         switch (messType)
                         {
                             case "MessagePackage":
                             {
-                                Debug.Log("GotMessage");
                                 MessagePackage messagePackage = JsonConvert.DeserializeObject<MessagePackage>(message);
-                                ChatHolder.messages.Add(messagePackage.Content);
-                                Debug.Log(messagePackage.Content);
-                                if(ChatScript.Instance != null)
-                                    ChatScript.Instance.CreateNewMessage(messagePackage.Content);
+                                ChatHolder.AddMessage(messagePackage);
+                                GameController.Instance.AddAction(() => { SendMessage(messagePackage);});
                                 break;
                             }
                             case "PlayerPackage":
                             {
-                                Debug.Log("GotPlayer");
                                 PlayerPackage playerPackage = JsonConvert.DeserializeObject<PlayerPackage>(message);
                                 Debug.Log($"{playerPackage.Nickname} переместился на координаты: {playerPackage.PositionX}, {playerPackage.PositionY}");
                                 break;
                             }
                             default:
                             {
-                                Debug.Log("GotUnknownMessage");
                                 break;
                             }
                         }
@@ -90,8 +84,15 @@ namespace NetCode
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка получения сообщений: {ex.Message}");
+                Debug.Log($"Ошибка получения сообщений: {ex.Message}");
             }
+        }
+        
+        public static void SendMessage(MessagePackage messagePackage)
+        {
+            string message = messagePackage.Content;
+            if(ChatScript.Instance != null)
+                ChatScript.Instance.CreateNewMessage(message);
         }
     }
 }

@@ -60,6 +60,7 @@ class Server
             try
             {
                 client.SendMessage(message);
+                Console.WriteLine("Сообщение отправлено всем клентам");
             }
             catch
             {

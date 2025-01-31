@@ -30,7 +30,13 @@ class ClientHandler
             
             clientName = Encoding.UTF8.GetString(buff, 0, recB).Trim();
             Console.WriteLine($"{clientName} подключился к игре.");
-            server.BroadcastMessage($"Игрок {clientName} присоединился к игре", this);
+            var newClient = new MessagePackage
+            {
+                Sender = clientName,
+                Content = $"{clientName} подключился к игре",
+                Type = "MessagePackage"
+            };
+            server.BroadcastMessage(newClient, this);
 
             while (true)
             {

@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public static class ChatHolder
 { 
     public static List<string> messages = new List<string>();
     public static string messageStr = "";
 
-    public static void AddMessage(string message)
+    public static void AddMessage(MessagePackage message)
     {
-        messages.Add(message);
+        messages.Add(message.Content);
         UpdateAllMessages();
-        ChatScript.Instance.UpdateChat();
     }
     public static string UpdateAllMessages()
     {

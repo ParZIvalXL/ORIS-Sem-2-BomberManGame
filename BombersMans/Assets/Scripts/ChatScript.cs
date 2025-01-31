@@ -44,8 +44,8 @@ public class ChatScript : MonoBehaviour
 
         public void CreateNewMessage(string message)
         {
-            if(message.Length == 0) return;
-            UpdateChat();
+            // if(message.Length == 0) return;
+            textMessage.text += message;
         }
 
         public void Awake()
