@@ -8,12 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b8d803f-eda1-4368-a503-ddf856a2c5bb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Library/ArtifactDB" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Library/Bee/1900b0aE.dag" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Library/Bee/1900b0aE.dag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Library/Bee/1900b0aE.dag.json" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Library/Bee/1900b0aE.dag.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameServer/ClientObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ClientObject.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +35,12 @@
     &quot;assignee&quot;: &quot;ParZIvalXL&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/timurfajzullin/ORIS_2_SemWork_Faizullin_Khafizov.git&quot;,
-    &quot;accountId&quot;: &quot;93dc0cde-53cd-445c-86e1-73027b586603&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/ParZIvalXL/ORIS-Sem-2-BomberManGame.git",
+    "accountId": "93dc0cde-53cd-445c-86e1-73027b586603"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="Toolset" />
   </component>
@@ -60,7 +58,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;GameBranch&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -102,6 +100,8 @@
       <workItem from="1738077319432" duration="4042000" />
       <workItem from="1738092627786" duration="5442000" />
       <workItem from="1738129810635" duration="2694000" />
+      <workItem from="1738229616141" duration="2576000" />
+      <workItem from="1738234990802" duration="1349000" />
     </task>
     <servers />
   </component>

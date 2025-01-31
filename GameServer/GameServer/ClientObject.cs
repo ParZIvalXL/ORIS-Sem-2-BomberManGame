@@ -62,7 +62,7 @@ class ClientHandler
                         throw;
                     }
                 }
-                catch
+                catch  
                 {
                     Console.WriteLine($"{clientName} отключился.");
                     server.BroadcastMessage($"Игрок {clientName} отключился от игры", this);
