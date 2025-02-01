@@ -115,3 +115,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b258f4d5ae6954847a834232138f3d2d, type: 2}
   explosionTiles:
   - {fileID: 11400000, guid: 93b7be1758b7f394aa307a3810edbb23, type: 2}
+  explosionLayerMask:
+    serializedVersion: 2
+    m_Bits: 768

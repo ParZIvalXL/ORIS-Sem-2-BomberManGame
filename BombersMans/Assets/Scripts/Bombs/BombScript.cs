@@ -17,7 +17,7 @@ public class BombScript : MonoBehaviour
     public float damage = 25;
     [SerializeField] public AnimatedTile[] animatedExplosionTiles;
     [SerializeField] public Tile[] explosionTiles;
-
+    [SerializeField] private LayerMask explosionLayerMask;
     private void Start()
     {
         StartCoroutine(ExplosionTimer());
@@ -36,31 +36,36 @@ public class BombScript : MonoBehaviour
         foreach (var direction in directions)
         {
             var hit = Physics2D.Raycast(transform.position, direction);
-            var hitPos = hit.point;
-            hitPos.x = hit.point.x - 0.01f * hit.normal.x + 0.5f;
-            hitPos.y = hit.point.y - 0.01f * hit.normal.y + 0.5f;
-            if(!hit.collider.TryGetComponent(out Tilemap tilemap))
-                return;
             
-            var bombPosOnTile = tilemap.WorldToCell(transform.position);
-            var hitPosOnTile = tilemap.WorldToCell(hitPos);
-            GameAnimationController.Instance.AnimateTileExplosion(hitPosOnTile, bombPosOnTile, explosionTiles, animatedExplosionTiles);
-            
-            
-            Debug.Log("layer: " + (hit.collider.gameObject.layer == LayerMask.NameToLayer("Breakable")) + hitPosOnTile + hit.collider.name);
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Breakable"))
-            {
-                tilemap.SetTile(tilemap.WorldToCell(hitPosOnTile), null);
-                // Собрать информацию о уничтоженном блоке и отправить на проверку серверу
-            }
-
-            else if (hit.collider.gameObject.CompareTag("Player"))
+            if (hit.collider.gameObject.CompareTag("Player"))
             {
                 // Переделать под триггер вызрыва
                 if(!hit.collider.TryGetComponent(out PlayerController playerController))
                     return;
                 playerController.TakeDamage(damage);
             }
+            
+            hit = Physics2D.Raycast(transform.position, direction, 100f, explosionLayerMask);
+            
+            var hitPos = hit.point;
+            hitPos.x = hit.point.x - 0.01f * hit.normal.x;
+            hitPos.y = hit.point.y - 0.01f * hit.normal.y;
+            
+            if(!hit.collider.TryGetComponent(out Tilemap tilemap))
+                return;
+            
+            var bombPosOnTile = tilemap.WorldToCell(transform.position);
+            var hitPosOnTile = tilemap.WorldToCell(hitPos);
+            
+            Debug.DrawRay(transform.position, direction, Color.green, 5f);
+            GameAnimationController.Instance.AnimateTileExplosion(hitPosOnTile, bombPosOnTile, explosionTiles, animatedExplosionTiles);
+            
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Breakable"))
+            {
+                tilemap.SetTile(hitPosOnTile, null);
+                // Собрать информацию о уничтоженном блоке и отправить на проверку серверу
+            }
+            
             
         }
         
