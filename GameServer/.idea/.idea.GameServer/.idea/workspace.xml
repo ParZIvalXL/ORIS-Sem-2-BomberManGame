@@ -8,9 +8,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b8d803f-eda1-4368-a503-ddf856a2c5bb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Bombs/BombScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Bombs/BombScript.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Maps.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Maps.json.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/GameController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +112,7 @@
       <workItem from="1738339464786" duration="8873000" />
       <workItem from="1738353628996" duration="71000" />
       <workItem from="1738409137621" duration="471000" />
+      <workItem from="1738540670133" duration="110000" />
     </task>
     <servers />
   </component>
