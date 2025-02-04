@@ -8997,7 +8997,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1552522257}
   m_Direction: 2
   m_Value: 0.99999994
-  m_Size: 0.19160357
+  m_Size: 0.19160406
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9542,7 +9542,7 @@ MonoBehaviour:
   _connectButton: {fileID: 2092198323}
   _inputField: {fileID: 1154705232}
   uiChat: {fileID: 1364622102}
-  chatPanel: {fileID: 0}
+  chatPanel: {fileID: 695181952}
   textMessage: {fileID: 1172039414}
   IsChatOpen: 0
 --- !u!1 &1019883009
@@ -11067,7 +11067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiManager: {fileID: 1629516652}
   chatScript: {fileID: 957792934}
-  _clientPlayerController: {fileID: 0}
+  _clientPlayerController: {fileID: 1019883013}
 --- !u!114 &1527305506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11081,6 +11081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActionTilemap: {fileID: 1070176619}
+  grid: {fileID: 657549612}
 --- !u!114 &1527305507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11125,7 +11126,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1815084446}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.8083968}
+  m_AnchorMin: {x: 0, y: 0.80839586}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}

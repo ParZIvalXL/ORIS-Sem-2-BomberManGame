@@ -56,9 +56,8 @@ namespace NetCode
                     if (receivedBytes > 0)
                     {
                         string message = Encoding.UTF8.GetString(buffer, 0, receivedBytes);
-                        var messageObject = JsonConvert.DeserializeObject<Dictionary<string, string>>(message);
-                        string messType = messageObject["Type"];
-
+                        var messageObject = JsonConvert.DeserializeObject<Dictionary<string, object>>(message);
+                        string messType = messageObject["Type"].ToString();
                         switch (messType)
                         {
                             case "MessagePackage":
@@ -74,6 +73,19 @@ namespace NetCode
                                 Debug.Log($"{playerPackage.Nickname} переместился на координаты: {playerPackage.PositionX}, {playerPackage.PositionY}");
                                 break;
                             }
+
+                            case "CurrentSession":
+                            {
+                                CurrentSession currentSession =
+                                    JsonConvert.DeserializeObject<CurrentSession>(message);
+                                ChatHolder.AddMessage(new MessagePackage
+                                {
+                                    Sender = "Server",
+                                    Content = "Карта загружена",
+                                });
+                                break;
+                            }
+                            
                             default:
                             {
                                 break;

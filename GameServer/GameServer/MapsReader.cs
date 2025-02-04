@@ -5,11 +5,10 @@ namespace GameServer;
 
 public class MapsReader
 {
-    public static TileType[][]? GetMap(string filePath)
+    public static TileType[][]? GetMap(string jsonContent)
     {
         try
         {
-            string jsonContent = File.ReadAllText(filePath);
             var res = JsonConvert.DeserializeObject<Dictionary<string, List<Dictionary<string, object>>>>(jsonContent);
             if (res != null && res.ContainsKey("Maps") && res["Maps"].Count > 0)
             {
@@ -27,4 +26,5 @@ public class MapsReader
         }
         return null;
     }
+
 }

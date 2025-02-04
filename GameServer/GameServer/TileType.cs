@@ -2,9 +2,10 @@
 
 public enum TileType
 {
-    Empty,
-    Durable,
-    Breakable,
-    Exploded,
-    Spawner
+    E, // -- Empty
+    D, // -- Durable
+    B, // -- Breakable
+    Ex, // -- Exploded
+    S, // -- Spawner
+    Bomb 
 }

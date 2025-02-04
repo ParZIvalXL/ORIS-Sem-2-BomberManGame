@@ -10,7 +10,7 @@ class ClientHandler
 {
     private readonly Socket clientSocket;
     private readonly Server server;
-    private string clientName = "Unknown";
+    public string clientName = "Unknown";
     private bool connected;
 
     public ClientHandler(Socket socket, Server server)
@@ -26,8 +26,6 @@ class ClientHandler
         {
             var buff = new byte[1024];
             int recB = clientSocket.Receive(buff);
-            
-            
             clientName = Encoding.UTF8.GetString(buff, 0, recB).Trim();
             Console.WriteLine($"{clientName} подключился к игре.");
             var newClient = new MessagePackage
@@ -36,7 +34,7 @@ class ClientHandler
                 Content = $"{clientName} подключился к игре",
                 Type = "MessagePackage"
             };
-            server.BroadcastMessage(newClient, this);
+            server.BroadcastPackage(newClient, this);
 
             while (true)
             {
@@ -55,14 +53,14 @@ class ClientHandler
                             {
                                 PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(mess);
                                 Console.WriteLine($"Игрок передвинулся: X={package.PositionX}, Y={package.PositionY}");
-                                server.BroadcastMessage(package, this);
+                                server.BroadcastPackage(package, this);
                                 break;
                             }
                             case "MessagePackage":
                             {
                                 MessagePackage? package = JsonConvert.DeserializeObject<MessagePackage>(mess);
                                 Console.WriteLine($"{package.Sender}: {package.Content}");
-                                server.BroadcastMessage(package, this);
+                                server.BroadcastPackage(package, this);
                                 break;
                             }
                             case "BombPackage":
@@ -84,7 +82,7 @@ class ClientHandler
                 catch  
                 {
                     Console.WriteLine($"{clientName} отключился.");
-                    server.BroadcastMessage($"Игрок {clientName} отключился от игры", this);
+                    server.BroadcastPackage($"Игрок {clientName} отключился от игры", this);
                     break;
                 }
             }

@@ -15,6 +15,7 @@ class Server
     private Socket listenerSocket;
     private List<ClientHandler> clients = new List<ClientHandler>();
     private readonly int port;
+    public TileType[][]? _map;
 
     public Server(int port)
     {
@@ -29,13 +30,20 @@ class Server
             listenerSocket.Bind(new IPEndPoint(IPAddress.Any, port));
             listenerSocket.Listen(10);
             Console.WriteLine($"Сервер запущен на {IPAddress.Any}:{port}. Ожидание подключений...");
-            Console.WriteLine(new CurrentSession("Maps.json"));
+            _map = MapsReader.GetMap(File.ReadAllText("Maps.json"));
             while (true)
             {
                 var clientSocket = listenerSocket.Accept();
                 var clientHandler = new ClientHandler(clientSocket, this);
                 clients.Add(clientHandler);
                 Task.Run(() => clientHandler.HandleClient());
+                var curentSession = new CurrentSession
+                {
+                    grid = _map,
+                    Type = nameof(CurrentSession)
+                };
+                
+                BroadcastPackage(curentSession, clientHandler);
             }
         }
         catch (SocketException ex)
@@ -52,9 +60,14 @@ class Server
         }
     }
 
-    public void BroadcastMessage(object? obj, ClientHandler sender)
+    public void BroadcastPackage(object? obj, ClientHandler sender)
     {
         var message = JsonConvert.SerializeObject(obj);
+        if (typeof(CurrentSession) == obj.GetType() && sender == clients[clients.Count - 1])
+        {
+            sender.SendMessage(message);
+            return;
+        }
 
         foreach (var client in clients)
         {
