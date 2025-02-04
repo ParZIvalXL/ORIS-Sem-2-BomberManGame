@@ -8,7 +8,10 @@ public class UIManager : MonoBehaviour
     public bool IsChatOpen = false;
     [SerializeField] private UILogin loginWindow;
     [SerializeField] private UIChat chatWindow;
+    public GameOverScreen gameOverScreen;
+    public UIGameOver gameEndScreen;
     private IInterface _currentInterface;
+    [SerializeField] private GameObject blur;
     public IInterface CurrentInterface => _currentInterface;
     public bool HasCurrentInterface => _currentInterface != null;
 
@@ -19,6 +22,15 @@ public class UIManager : MonoBehaviour
         OpenInterface(chatWindow);
     }
 
+    public void Blur()
+    {
+        blur.SetActive(true);
+    }
+
+    public void UnBlur()
+    {
+        blur.SetActive(false);
+    }
     public void OpenInterface(IInterface newInterface)
     {
         Debug.Log("OpenInterface " + newInterface);
@@ -41,7 +53,14 @@ public class UIManager : MonoBehaviour
         
         _currentInterface.Close();
         _currentInterface = null;
+        UnBlur();
         InputManager.Instance.ClientPlayerController.ControlLocked = false;
+    }
+    
+    public void ShowGameOver(string message, PlayerGameEndReason reason)
+    {
+        gameOverScreen.Show(message, reason == PlayerGameEndReason.Winner);
+        gameEndScreen.Open();
     }
 
     private void Awake()
