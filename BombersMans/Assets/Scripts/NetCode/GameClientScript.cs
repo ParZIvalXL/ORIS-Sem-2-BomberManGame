@@ -158,6 +158,14 @@ namespace NetCode
                                         Sender = "Server",
                                         Content = "Карта загружена",
                                     });
+                                    GameController.Instance.AddAction(() =>
+                                    {
+                                        UIManager.Instance.loadingUI.SetText("Карта загружена! Сейчас все расставим и можно играть!");
+                                        
+                                        MapBuilder.Instance.GenerateMap(currentSession);
+                                        
+                                        UIManager.Instance.loadingUI.HideLoader(true);
+                                    });
                                     
                                     // код для конвертации карты
                                     break;
