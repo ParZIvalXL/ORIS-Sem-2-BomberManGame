@@ -8,12 +8,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b8d803f-eda1-4368-a503-ddf856a2c5bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GameServer/ConnectionState.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameServer/Packages/ConnectionStatusPackage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/CurrentSession.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/CurrentSession.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/PlayerPackage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/PlayerPackage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/ClientObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ClientObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/ServerObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ServerObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameServer/Packages/PlayerPackage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/Packages/PlayerPackage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameServer/PlayerHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/PlayerHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +34,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="main" />
+        <entry key="$PROJECT_DIR$/.." value="TimurBranch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -119,6 +120,7 @@
       <workItem from="1738540670133" duration="110000" />
       <workItem from="1738737893645" duration="120000" />
       <workItem from="1738761644161" duration="5725000" />
+      <workItem from="1738781176314" duration="15000" />
     </task>
     <servers />
   </component>

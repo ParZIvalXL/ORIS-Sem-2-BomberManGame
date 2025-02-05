@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CurrentSession
 {
-    public TileType[][]? grid { get; set;}
+    public TileType[,]? grid { get; set;}
         
     public string Type { get; set; }
 }
