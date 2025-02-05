@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NetCode.Packages;
 using Newtonsoft.Json;
+using UI;
 using UnityEngine;
 
 namespace NetCode
@@ -24,12 +25,46 @@ namespace NetCode
         }
         public async Task ConnectingPlayer(string name)
         {
+            UIConnectScript.Instance._connectButton.interactable = false;
             _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            _client.Connect(_host, _port);
+            try
+            {
+                UIManager.Instance.loadingUI.SetText("Пытаемся подключиться к серверу, подождите чуть-чуть...");
+                UIManager.Instance.loadingUI.Show(true);
+                await ConnectToServer();
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+                UIManager.Instance.loadingUI.SetText("Кажется, что-то пошло не так, пробуем снова...");
+                try
+                {
+                    await ConnectToServer();
+                }
+                catch (Exception ex)
+                {
+                    Debug.Log(ex);
+                    UIManager.Instance.loadingUI.SetText("Не удалось установить соединение с сервером, попробуйте позже...");
+                    UIManager.Instance.loadingUI.HideLoader(true);
+                    UIConnectScript.Instance._connectButton.interactable = true;
+                    return;
+                }
+            }
+
+            // Проверяем, действительно ли клиент подключен
+            if (!_client.Connected)
+            {
+                UIManager.Instance.loadingUI.SetText("Не удалось установить соединение с сервером.");
+                UIManager.Instance.loadingUI.HideLoader(true);
+                return;
+            }
+
+            UIManager.Instance.loadingUI.SetText("Успешно подключились! Отправляем ваши данные...");
             playerName = name;
             await SendName(playerName);
             try
             {
+                UIManager.Instance.loadingUI.SetText("Зарегистрировались! Ждем данные и игровой сессии...");
                 _ = Task.Run(() => ReceiveMessagesAsync(_client));
             }
             catch (Exception e)
@@ -38,6 +73,35 @@ namespace NetCode
             }
             
         }
+
+        public async Task ConnectToServer()
+        {
+            try
+            {
+                Debug.Log("Connecting...");
+
+                // Устанавливаем таймаут для подключения (например, 5 секунд)
+                var connectTask = _client.ConnectAsync(_host, _port);
+                var timeoutTask = Task.Delay(5000); // 5 секунд
+
+                var completedTask = await Task.WhenAny(connectTask, timeoutTask);
+
+                if (completedTask == timeoutTask || !_client.Connected) // Добавляем проверку _client.Connected
+                {
+                    throw new TimeoutException("Не удалось подключиться к серверу за отведенное время или сервер недоступен.");
+                }
+
+                // Если подключение успешно
+                Debug.Log("Connected!");
+                UIManager.Instance.CloseInterface(true);
+                UIConnectScript.Instance.uiLogin.Close();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Не удалось подключиться к серверу: " + e.Message); 
+            }
+        }
+
 
         public async Task SendMessagesAsync(string message)
         {
@@ -85,7 +149,40 @@ namespace NetCode
                                     // какой то код
                                     break;
                                 }
+                        string message = Encoding.UTF8.GetString(buffer, 0, receivedBytes);
+                        Debug.Log(message);
+                        var messageObject = JsonConvert.DeserializeObject<Dictionary<string, object>>(message);
+                        string messType = messageObject["Type"].ToString();
+                        switch (messType)
+                        {
+                            case "MessagePackage":
+                            {
+                                MessagePackage messagePackage = JsonConvert.DeserializeObject<MessagePackage>(message);
+                                ChatHolder.AddMessage(messagePackage);
+                                GameController.Instance.AddAction(() => { SendMessage(messagePackage);});
+                                break;
+                            }
+                            case "PlayerPackage":
+                            {
+                                PlayerPackage playerPackage = JsonConvert.DeserializeObject<PlayerPackage>(message);
+                                Debug.Log($"{playerPackage.Nickname} переместился на координаты: {playerPackage.PositionX}, {playerPackage.PositionY}");
+                                break;
+                            }
 
+                            case "CurrentSession":
+                            {
+                                UIManager.Instance.loadingUI.SetText("Загружаем игровые данные о сессии... Скоро вы сможете играть");
+                                CurrentSession currentSession =
+                                    JsonConvert.DeserializeObject<CurrentSession>(message);
+                                ChatHolder.AddMessage(new MessagePackage
+                                {
+                                    Sender = "Server",
+                                    Content = "Карта загружена",
+                                });
+                                UIManager.Instance.loadingUI.SetText("Данные успешно получены! Запускаем игру...");
+                                UIManager.Instance.loadingUI.HideLoader(true);
+                                break;
+                            }
                                 case "CurrentSession":
                                 {
                                     CurrentSession currentSession =
