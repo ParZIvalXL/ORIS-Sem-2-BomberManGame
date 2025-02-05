@@ -5,7 +5,7 @@ namespace GameServer;
 
 public class MapsReader
 {
-    public static TileType[][]? GetMap(string jsonContent)
+    public static TileType[,]? GetMap(string jsonContent)
     {
         try
         {
@@ -16,7 +16,21 @@ public class MapsReader
                 if (firstMap.ContainsKey("Grid"))
                 {
                     string gridJson = firstMap["Grid"].ToString();
-                    return JsonConvert.DeserializeObject<TileType[][]>(gridJson);
+                    var jaggedArray = JsonConvert.DeserializeObject<TileType[][]>(gridJson);
+                    
+                    int rows = jaggedArray.Length;
+                    int cols = jaggedArray[0].Length;
+                    TileType[,] grid = new TileType[rows, cols];
+                    
+                    for (int i = 0; i < rows; i++)
+                    {
+                        for (int j = 0; j < cols; j++)
+                        {
+                            grid[i, j] = jaggedArray[i][j];
+                        }
+                    }
+                    
+                    return grid;
                 }
             }
         }
@@ -26,5 +40,4 @@ public class MapsReader
         }
         return null;
     }
-
 }

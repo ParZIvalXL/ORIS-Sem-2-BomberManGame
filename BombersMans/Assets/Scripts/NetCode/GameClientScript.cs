@@ -227,7 +227,6 @@ namespace NetCode
             var playerPackage = JsonConvert.SerializeObject(player);
             
             await SendMessagesAsync(playerPackage);
-
         }
     }
 }
