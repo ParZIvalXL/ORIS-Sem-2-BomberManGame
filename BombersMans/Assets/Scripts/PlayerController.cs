@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         {
             bombScript.name = _playerNickname;
         }
-        
+        GameClientScript.Instance.SendBombPackage(spawnPosition);
     }
 
     private void Awake()

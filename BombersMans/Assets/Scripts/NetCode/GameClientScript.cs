@@ -199,5 +199,27 @@ namespace NetCode
             if(ChatScript.Instance != null)
                 ChatScript.Instance.CreateNewMessage(message);
         }
+        
+        public async void SendBombPackage(Vector2 position)
+        {
+            var bombPackage = JsonConvert.SerializeObject(new BombPackage
+            {
+                playerNickname = playerName,
+                BombType = BombType.Classic.ToString(),
+                PositionX = Mathf.RoundToInt(position.x),
+                PositionY = Mathf.RoundToInt(position.y),
+                Type = nameof(BombPackage)
+            });
+
+            await SendMessagesAsync(bombPackage);
+        }
+
+        public async void SendPlayerPackage(PlayerPackage player)
+        {
+            var playerPackage = JsonConvert.SerializeObject(player);
+            
+            await SendMessagesAsync(playerPackage);
+
+        }
     }
 }
