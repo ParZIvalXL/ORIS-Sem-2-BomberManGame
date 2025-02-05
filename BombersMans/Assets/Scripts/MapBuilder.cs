@@ -1,4 +1,6 @@
 ﻿using System;
+using NetCode;
+using NetCode.Packages;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -13,6 +15,7 @@ public class MapBuilder : MonoBehaviour
     public Tile breakableTile;
     public Tile floorTile;
     public Tile boundsTile;
+    public BoxCollider2D CameraBorder;
 
     private void Awake()
     {
@@ -22,19 +25,58 @@ public class MapBuilder : MonoBehaviour
     public void GenerateMap(CurrentSession session)
     {
         ClearMap();
-
         var mapToBuild = session.grid;
+        var mapX = mapToBuild.GetLength(0);
+        var mapY = mapToBuild.GetLength(1);
+        Debug.Log("X: " +  mapX + " Y: " + mapY);
+        CameraBorder.transform.position = new Vector3(mapX / 2f + 0.5f, mapY / 2f + 0.5f, 0);
+        var bounds = CameraBorder.bounds;
+        bounds.size = new Vector3(mapX, mapY, 0);
 
-        for (int i = 0; i < mapToBuild.GetLength(0); i++)
+        for (int i = 0; i < mapX; i++)
         {
-            for (int j = 0; j < mapToBuild.GetLength(1); j++)
+            for (int j = 0; j < mapY; j++)
             {
                 var tile = mapToBuild[i, j];
                 var tilePosition = new Vector3Int(i, j, 0);
+                switch (tile)
+                {
+                    case TileType.B:
+                        breakable.SetTile(tilePosition, breakableTile);
+                        break;
+                    case TileType.D:
+                        unbreakable.SetTile(tilePosition, unbreakableTile);
+                        break;
+                }
+                main.SetTile(tilePosition, floorTile);
             }
+        }
+
+        for (int i = -1; i < mapX + 1; i++)
+        {
+            unbreakable.SetTile(new Vector3Int(i, -1, 0), boundsTile);
+            unbreakable.SetTile(new Vector3Int(i, mapY, 0), boundsTile);
+        }
+        
+        for (int j = 0; j < mapY; j++)
+        {
+            unbreakable.SetTile(new Vector3Int(-1, j, 0), boundsTile);
+            unbreakable.SetTile(new Vector3Int(mapX,  j, 0), boundsTile);
         }
     }
 
+    public void CreatePlayer(PlayerPackage playerPackage)
+    {
+        Debug.Log("is player - client? " + playerPackage.Nickname == GameClientScript.Instance.name);
+        Debug.Log("got player with nickname: " + playerPackage.Nickname + " when client is: " + GameClientScript.Instance.name);
+        if (playerPackage.Nickname == GameClientScript.Instance.name)
+        {
+            Debug.Log("Teleporting player to " + playerPackage.SpawnPositionX + ", " + playerPackage.SpawnPositionY);
+            var spawnPoint = new Vector3(playerPackage.SpawnPositionX, playerPackage.SpawnPositionY, 0);
+            PlayerController.Instance._rb.position = spawnPoint;
+            PlayerController.Instance.transform.position = spawnPoint;
+        }
+    }
     private void ClearMap()
     {
         main.ClearAllTiles();

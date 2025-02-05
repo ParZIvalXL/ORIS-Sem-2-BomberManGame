@@ -180,7 +180,10 @@ namespace NetCode
                                         Sender = "Server",
                                         Content = $"Игрок {playerPackage.Nickname} появился на позиции X: {playerPackage.SpawnPositionX}, Y:{playerPackage.SpawnPositionY}"
                                     });
-                                    
+                                    GameController.Instance.AddAction(() =>
+                                    {
+                                        MapBuilder.Instance.CreatePlayer(playerPackage);
+                                    });
                                     // код для спавна игрока на карте
                                     break;
                                 }

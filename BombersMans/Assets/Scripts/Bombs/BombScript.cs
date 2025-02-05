@@ -36,7 +36,8 @@ public class BombScript : MonoBehaviour
         foreach (var direction in directions)
         {
             var hit = Physics2D.Raycast(transform.position, direction);
-            
+            if(!hit) 
+                return;
             if (hit.collider.gameObject.CompareTag("Player"))
             {
                 // Переделать под триггер вызрыва

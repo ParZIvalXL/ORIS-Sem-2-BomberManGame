@@ -8,11 +8,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b8d803f-eda1-4368-a503-ddf856a2c5bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/MapBuilder.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/MapBuilder.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/IInterface.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/IInterface.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/IInterface.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/IInterface.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Bombs/BombScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Bombs/BombScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/MapBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/MapBuilder.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/CurrentSession.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/CurrentSession.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +68,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "ClientFeatures",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
