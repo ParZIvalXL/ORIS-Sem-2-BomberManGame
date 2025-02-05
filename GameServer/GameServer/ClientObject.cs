@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 using System.Net.Sockets;
 using System.Text;
+using GameServer;
 using GameServer.Packages;
 using Newtonsoft.Json;
 using JsonException = System.Text.Json.JsonException;
@@ -35,6 +36,32 @@ class ClientHandler
                 Type = "MessagePackage"
             };
             server.BroadcastPackage(newClient, this);
+            
+            var spawnPlayerPackage = new PlayerPackage
+            {
+                Nickname = clientName,
+                SpawnPositionX = MapUpdater.SpawnPlayer(server._map).Item1,
+                SpawnPositionY = MapUpdater.SpawnPlayer(server._map).Item2,
+                Type = "SpawnPlayer"
+            };
+                
+            server.BroadcastPackage(spawnPlayerPackage, this);
+                    
+            var curentSession = new CurrentSession
+            {
+                grid = server._map,
+                Type = nameof(CurrentSession)
+            };
+                
+            server.BroadcastPackage(curentSession, this);
+
+            var connectionStatusPackage = new ConnectionStatusPackage
+            {
+                ConnectionState = (int)ConnectionState.Successful,
+                ConnectionDescription = ConnectionState.Successful.ToString()
+            };
+            
+            server.BroadcastPackage(connectionStatusPackage, this);
 
             while (true)
             {

@@ -187,6 +187,13 @@ namespace NetCode
                                     // код для спавна игрока на карте
                                     break;
                                 }
+
+                                case "ConnectionStatusPackage":
+                                {
+                                    var connectionStatusPackage = JsonConvert.DeserializeObject<ConnectionStatusPackage>(message);
+                                    Debug.Log($"Статус подключения. {connectionStatusPackage.ConnectionDescription} - {connectionStatusPackage.ConnectionState}");
+                                    break;
+                                }
                             
                                 default:
                                 {
