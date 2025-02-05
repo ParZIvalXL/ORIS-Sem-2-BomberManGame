@@ -37,6 +37,17 @@ class Server
                 var clientHandler = new ClientHandler(clientSocket, this);
                 clients.Add(clientHandler);
                 Task.Run(() => clientHandler.HandleClient());
+
+                var spawnPlayerPackage = new PlayerPackage
+                {
+                    Nickname = clientHandler.clientName,
+                    SpawnPositionX = MapUpdater.SpawnPlayer(_map).Item1,
+                    SpawnPositionY = MapUpdater.SpawnPlayer(_map).Item2,
+                    Type = "SpawnPlayer"
+                };
+                
+                BroadcastPackage(spawnPlayerPackage, clientHandler);
+                    
                 var curentSession = new CurrentSession
                 {
                     grid = _map,

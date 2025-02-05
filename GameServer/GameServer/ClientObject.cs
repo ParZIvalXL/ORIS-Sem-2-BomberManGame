@@ -65,6 +65,11 @@ class ClientHandler
                             }
                             case "BombPackage":
                             {
+                                BombPackage? package = JsonConvert.DeserializeObject<BombPackage>(mess);
+                                Console.WriteLine($"Игрок {package.playerNickname} поставил бомбу {package.BombType} " +
+                                                  $"по координатам X:{package.PositionX}, Y:{package.PositionY}");
+                                MapUpdater.SetBomb(server._map, package);
+                                server.BroadcastPackage(package, this);
                                 break;
                             }
                             case "CurrentPackage":
