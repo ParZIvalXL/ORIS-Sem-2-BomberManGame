@@ -1,4 +1,6 @@
 ﻿using System;
+using NetCode;
+using NetCode.Packages;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public GameObject[] Bombs;
     public bool ControlLocked { get; set ; }
     
+    
     public Vector2 GetIntPosition()
     {
         Vector2 curr = transform.position;
@@ -39,6 +42,7 @@ public class PlayerController : MonoBehaviour
         {
             bombScript.name = _playerNickname;
         }
+        GameClientScript.Instance.SendBombPackage(spawnPosition);
     }
 
     private void Awake()
