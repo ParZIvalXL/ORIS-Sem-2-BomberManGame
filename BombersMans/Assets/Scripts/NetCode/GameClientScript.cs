@@ -149,40 +149,6 @@ namespace NetCode
                                     // какой то код
                                     break;
                                 }
-                        string message = Encoding.UTF8.GetString(buffer, 0, receivedBytes);
-                        Debug.Log(message);
-                        var messageObject = JsonConvert.DeserializeObject<Dictionary<string, object>>(message);
-                        string messType = messageObject["Type"].ToString();
-                        switch (messType)
-                        {
-                            case "MessagePackage":
-                            {
-                                MessagePackage messagePackage = JsonConvert.DeserializeObject<MessagePackage>(message);
-                                ChatHolder.AddMessage(messagePackage);
-                                GameController.Instance.AddAction(() => { SendMessage(messagePackage);});
-                                break;
-                            }
-                            case "PlayerPackage":
-                            {
-                                PlayerPackage playerPackage = JsonConvert.DeserializeObject<PlayerPackage>(message);
-                                Debug.Log($"{playerPackage.Nickname} переместился на координаты: {playerPackage.PositionX}, {playerPackage.PositionY}");
-                                break;
-                            }
-
-                            case "CurrentSession":
-                            {
-                                UIManager.Instance.loadingUI.SetText("Загружаем игровые данные о сессии... Скоро вы сможете играть");
-                                CurrentSession currentSession =
-                                    JsonConvert.DeserializeObject<CurrentSession>(message);
-                                ChatHolder.AddMessage(new MessagePackage
-                                {
-                                    Sender = "Server",
-                                    Content = "Карта загружена",
-                                });
-                                UIManager.Instance.loadingUI.SetText("Данные успешно получены! Запускаем игру...");
-                                UIManager.Instance.loadingUI.HideLoader(true);
-                                break;
-                            }
                                 case "CurrentSession":
                                 {
                                     CurrentSession currentSession =
@@ -232,28 +198,6 @@ namespace NetCode
             string message = prefix + messagePackage.Content;
             if(ChatScript.Instance != null)
                 ChatScript.Instance.CreateNewMessage(message);
-        }
-        
-        public async void SendBombPackage(Vector2 position)
-        {
-            var bombPackage = JsonConvert.SerializeObject(new BombPackage
-            {
-                playerNickname = playerName,
-                BombType = BombType.Classic.ToString(),
-                PositionX = Mathf.RoundToInt(position.x),
-                PositionY = Mathf.RoundToInt(position.y),
-                Type = nameof(BombPackage)
-            });
-
-            await SendMessagesAsync(bombPackage);
-        }
-
-        public async void SendPlayerPackage(PlayerPackage player)
-        {
-            var playerPackage = JsonConvert.SerializeObject(player);
-            
-            await SendMessagesAsync(playerPackage);
-
         }
     }
 }
