@@ -5,24 +5,24 @@ namespace GameServer.Packages;
 public static class MapUpdater
 {
     private static Random random = new Random();
-    public static void SetBomb(TileType[][] grid ,BombPackage bomb)
+    public static void SetBomb(TileType[,] grid, BombPackage bomb)
     {
-        if (grid[bomb.PositionX][bomb.PositionY] != Bomb) return;
-        grid[bomb.PositionX][bomb.PositionY] = Bomb;
+        if (grid[bomb.PositionX, bomb.PositionY] != Bomb) return;
+        grid[bomb.PositionX, bomb.PositionY] = Bomb;
     }
     
-    public static (int, int) SpawnPlayer(TileType[][] grid)
+    public static (int, int) SpawnPlayer(TileType[,] grid)
     {
         List<(int, int)> validPositions = new List<(int, int)>();
 
-        int rows = grid.Length;
-        int cols = grid[0].Length;
+        int rows = grid.GetLength(0);
+        int cols = grid.GetLength(1);
         
         for (int x = 0; x < rows; x++)
         {
             for (int y = 0; y < cols; y++)
             {
-                if (grid[x][y] == E && IsSafe(x, y, grid))
+                if (grid[x, y] == E && IsSafe(x, y, grid))
                 {
                     validPositions.Add((x, y));
                 }
@@ -32,7 +32,7 @@ public static class MapUpdater
         if (validPositions.Count > 0)
         {
             var (spawnX, spawnY) = validPositions[random.Next(validPositions.Count)];
-            grid[spawnX][spawnY] = S;
+            grid[spawnX, spawnY] = S;
             
             return (spawnX, spawnY);
         }
@@ -44,10 +44,10 @@ public static class MapUpdater
         }
     }
 
-    private static bool IsSafe(int x, int y, TileType[][] grid)
+    private static bool IsSafe(int x, int y, TileType[,] grid)
     {
-        int rows = grid.Length;
-        int cols = grid[0].Length;
+        int rows = grid.GetLength(0);
+        int cols = grid.GetLength(1);
 
         for (int dx = -5; dx <= 5; dx++)
         {
@@ -58,7 +58,7 @@ public static class MapUpdater
 
                 if (newX >= 0 && newX < rows && newY >= 0 && newY < cols)
                 {
-                    if (grid[newX][newY] == Bomb)
+                    if (grid[newX, newY] == Bomb)
                     {
                         return false;
                     }

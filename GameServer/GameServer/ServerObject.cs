@@ -15,7 +15,7 @@ class Server
     private Socket listenerSocket;
     private List<ClientHandler> clients = new List<ClientHandler>();
     private readonly int port;
-    public TileType[][]? _map;
+    public TileType[,] _map;
 
     public Server(int port)
     {
