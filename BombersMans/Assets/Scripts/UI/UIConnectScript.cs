@@ -9,15 +9,20 @@ namespace NetCode
     public class UIConnectScript : MonoBehaviour
     {
         [SerializeField] private GameClientScript _gameClientScript;
-        [SerializeField] private Button _connectButton;
+        [SerializeField] public Button _connectButton;
         [SerializeField] private TMP_InputField _inputField;
-        [SerializeField] private UILogin uiLogin;
+        [SerializeField] public UILogin uiLogin;
+        public static UIConnectScript Instance { get; private set; }
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         private async void Connect()
         {
             string playerName = _inputField.text;
-            await _gameClientScript.ConnectingPlayer(playerName); 
-            UIManager.Instance.CloseInterface(true);
-            uiLogin.Close();
+            await _gameClientScript.ConnectingPlayer(playerName);
         }
 
         private void Start()

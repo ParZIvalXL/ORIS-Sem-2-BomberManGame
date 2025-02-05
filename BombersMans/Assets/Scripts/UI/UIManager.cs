@@ -1,5 +1,6 @@
 using System;
 using NetCode;
+using UI;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class UIManager : MonoBehaviour
     public UIGameOver gameEndScreen;
     private IInterface _currentInterface;
     [SerializeField] private GameObject blur;
+    public LoadingUI loadingUI;
     public IInterface CurrentInterface => _currentInterface;
     public bool HasCurrentInterface => _currentInterface != null;
 
@@ -66,5 +68,6 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        if(loadingUI.animator is null || LoadingUI.Instance is null) loadingUI.SetUp();
     }
 }

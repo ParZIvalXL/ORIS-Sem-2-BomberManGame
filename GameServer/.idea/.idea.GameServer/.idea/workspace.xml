@@ -8,35 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b8d803f-eda1-4368-a503-ddf856a2c5bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/CurrentSession.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/CurrentSession.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/TileType.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/TileType.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_00.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_00.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_01.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_01.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_02.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_02.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_03.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_03.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_04.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_04.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_05.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_05.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_06.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_06.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_07.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Sprites/All_Fire_Bullet_Pixel_16x16_07.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/ClientObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ClientObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/MapUpdater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/MapUpdater.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/Maps.json" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/Maps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/MapsReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/MapsReader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/Packages/CurrentSession.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/Packages/CurrentSession.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/ServerObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ServerObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/TileType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/TileType.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,21 +56,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Project.GameServer.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "TimurBranch",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Project.GameServer.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ClientFeatures&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="GameServer" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -138,6 +110,7 @@
       <workItem from="1738353628996" duration="71000" />
       <workItem from="1738409137621" duration="471000" />
       <workItem from="1738540670133" duration="110000" />
+      <workItem from="1738757890512" duration="739000" />
     </task>
     <servers />
   </component>
