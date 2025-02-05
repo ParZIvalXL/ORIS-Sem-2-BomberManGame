@@ -8,11 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b8d803f-eda1-4368-a503-ddf856a2c5bb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/GameServer/ConnectionState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GameServer/Packages/ConnectionStatusPackage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/MapUpdater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/MapUpdater.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/MapsReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/MapsReader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/Packages/CurrentSession.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/Packages/CurrentSession.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameServer/ClientObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ClientObject.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameServer/ServerObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ServerObject.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
