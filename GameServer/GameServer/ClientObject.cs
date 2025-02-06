@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Diagnostics;
+using System.Net.Http.Json;
 using System.Net.Sockets;
 using System.Text;
 using GameServer;
@@ -69,6 +70,7 @@ class ClientHandler
                 List = _playersListPackage
             }, this);
             
+            
             while (true)
             {
                 try
@@ -129,10 +131,6 @@ class ClientHandler
                                         $"по координатам X:{package.PositionX}, Y:{package.PositionY}");
                                     MapUpdater.SetBomb(server._map, package);
                                     server.BroadcastPackage(package, this);
-                                    break;
-                                }
-                                case "CurrentPackage":
-                                {
                                     break;
                                 }
                             }

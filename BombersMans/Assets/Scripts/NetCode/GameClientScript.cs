@@ -161,10 +161,6 @@ namespace NetCode
                                         Sender = "Server",
                                         Content = "Карта загружена",
                                     });
-                                    // foreach (var player in currentSession.list)
-                                    // {
-                                    //     Debug.Log(player);
-                                    // }
                                     GameController.Instance.AddAction(() =>
                                     {
                                         UIManager.Instance.loadingUI.SetText("Карта загружена! Сейчас все расставим и можно играть!");
@@ -255,6 +251,7 @@ namespace NetCode
         {
             var prefix = messagePackage.Sender == null ? messagePackage.Sender + ": " : "";
             string message = prefix + messagePackage.Content;
+            Debug.Log(message);
             if(ChatScript.Instance != null)
                 ChatScript.Instance.CreateNewMessage(message);
         }

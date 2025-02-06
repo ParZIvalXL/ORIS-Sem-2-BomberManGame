@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
     {
         health -= damage;
         Debug.Log("taking damage " + health);
+        UIManager.Instance.UpdateHealthBar();
         if (health <= 0)
         {
             OnDeathSequenceEnded();
