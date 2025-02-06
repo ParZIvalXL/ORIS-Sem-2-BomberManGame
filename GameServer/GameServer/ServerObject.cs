@@ -16,6 +16,7 @@ class Server
     private List<ClientHandler> clients = new List<ClientHandler>();
     private readonly int port;
     public TileType[,] _map;
+    public PlayersListPackage _playersListPackage;
 
     public Server(int port)
     {
