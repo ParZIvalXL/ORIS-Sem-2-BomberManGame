@@ -222,6 +222,19 @@ namespace NetCode
 
                                     break;
                                 }
+
+                                case "PlayersListPackage":
+                                {
+                                    Debug.Log("Вошли");
+                                    // var package = JsonConvert.DeserializeObject<PlayersListPackage>(message);
+                                    // Debug.Log(package);
+                                    // var playersList = package._players;
+                                    // foreach (var player in playersList)
+                                    // {
+                                    //     Debug.Log(player.Nickname + "KJFHGEFKJL:NLIVGCVBUONKL");
+                                    // }
+                                    break;
+                                }
                                 default:
                                 {
                                     break;

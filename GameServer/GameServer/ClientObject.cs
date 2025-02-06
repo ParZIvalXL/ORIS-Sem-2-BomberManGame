@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using System.Diagnostics;
+using System.Net.Http.Json;
 using System.Net.Sockets;
 using System.Text;
 using GameServer;
@@ -30,6 +31,11 @@ class ClientHandler
             int recB = clientSocket.Receive(buff);
             clientName = Encoding.UTF8.GetString(buff, 0, recB).Trim();
             Console.WriteLine($"{clientName} подключился к игре.");
+            server._playersListPackage._players.Add(new PlayerPackage
+            {
+                Nickname = clientName,
+            });
+            
             var newClient = new MessagePackage
             {
                 Sender = null,
@@ -64,6 +70,7 @@ class ClientHandler
 
             server.BroadcastPackage(connectionStatusPackage, this);
             
+            
             while (true)
             {
                 try
@@ -93,6 +100,17 @@ class ClientHandler
                                 case "PlayerPackage":
                                 {
                                     PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(json);
+                                    foreach (var player in server._playersListPackage._players)
+                                    {
+                                        if (player.Nickname == package.Nickname)
+                                        {
+                                            player.PositionX = package.PositionX;
+                                            player.PositionY = package.PositionY;
+                                            player.Health = package.Health;
+                                        }
+                                    }
+                                    server.BroadcastPackage(server._playersListPackage, this);
+                                    Console.WriteLine("Отправили");
                                     server.BroadcastPackage(package, this);
                                     break;
                                 }
@@ -111,10 +129,6 @@ class ClientHandler
                                         $"по координатам X:{package.PositionX}, Y:{package.PositionY}");
                                     MapUpdater.SetBomb(server._map, package);
                                     server.BroadcastPackage(package, this);
-                                    break;
-                                }
-                                case "CurrentPackage":
-                                {
                                     break;
                                 }
                             }
