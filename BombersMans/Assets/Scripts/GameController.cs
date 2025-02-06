@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     [SerializeField] public Tilemap ActionTilemap;
     public static GameController Instance;
     private string[,] tiles;
+    public List<BombScript> Bombs = new List<BombScript>();
     public Grid grid;
 
     private string[,] ReadMap()

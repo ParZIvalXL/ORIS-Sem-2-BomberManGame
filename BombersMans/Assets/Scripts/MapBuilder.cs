@@ -29,7 +29,7 @@ public class MapBuilder : MonoBehaviour
         var mapX = mapToBuild.GetLength(0);
         var mapY = mapToBuild.GetLength(1);
         Debug.Log("X: " +  mapX + " Y: " + mapY);
-        CameraBorder.transform.position = new Vector3(mapX / 2f + 0.5f, mapY / 2f + 0.5f, 0);
+        CameraBorder.transform.position = new Vector3(mapX / 2f - 0.5f, mapY / 2f - 0.5f, 0);
         var bounds = CameraBorder.bounds;
         bounds.size = new Vector3(mapX, mapY, 0);
 
@@ -68,11 +68,11 @@ public class MapBuilder : MonoBehaviour
     public void CreatePlayer(PlayerPackage playerPackage)
     {
         Debug.Log("is player - client? " + playerPackage.Nickname == GameClientScript.Instance.name);
-        Debug.Log("got player with nickname: " + playerPackage.Nickname + " when client is: " + GameClientScript.Instance.name);
-        if (playerPackage.Nickname == GameClientScript.Instance.name)
+        Debug.Log("got player with nickname: " + playerPackage.Nickname + " when client is: " + GameClientScript.Instance.playerName);
+        if (playerPackage.Nickname == GameClientScript.Instance.playerName)
         {
             Debug.Log("Teleporting player to " + playerPackage.SpawnPositionX + ", " + playerPackage.SpawnPositionY);
-            var spawnPoint = new Vector3(playerPackage.SpawnPositionX, playerPackage.SpawnPositionY, 0);
+            var spawnPoint = new Vector3(playerPackage.SpawnPositionX + 1f, playerPackage.SpawnPositionY + 1f, 0);
             PlayerController.Instance._rb.position = spawnPoint;
             PlayerController.Instance.transform.position = spawnPoint;
         }

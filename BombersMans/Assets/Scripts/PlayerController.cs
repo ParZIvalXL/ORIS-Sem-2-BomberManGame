@@ -38,12 +38,17 @@ public class PlayerController : MonoBehaviour
     public void SpawnBomb(int index)
     {
         var spawnPosition = GetIntPosition();
-        var bomb = Instantiate(Bombs[index], spawnPosition, Quaternion.identity);
+        Debug.Log("Bomb spawned at " + spawnPosition);
+        /*
+         var bomb = Instantiate(Bombs[index], spawnPosition, Quaternion.identity);
         if (bomb.TryGetComponent<BombScript>(out var bombScript))
         {
             bombScript.name = _playerNickname;
         }
-        GameClientScript.Instance.SendBombPackage(spawnPosition);
+        */
+
+        
+        GameClientScript.Instance.SendBombPackage(new Vector2(spawnPosition.x, spawnPosition.y));
     }
 
     private void Awake()

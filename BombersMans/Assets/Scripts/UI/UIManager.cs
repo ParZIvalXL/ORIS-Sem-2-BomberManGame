@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     private IInterface _currentInterface;
     [SerializeField] private GameObject blur;
     public LoadingUI loadingUI;
+    public UIHelp help;
     public IInterface CurrentInterface => _currentInterface;
     public bool HasCurrentInterface => _currentInterface != null;
 
@@ -36,7 +37,7 @@ public class UIManager : MonoBehaviour
     public void OpenInterface(IInterface newInterface)
     {
         Debug.Log("OpenInterface " + newInterface);
-        if (HasCurrentInterface)
+        if (HasCurrentInterface && newInterface is not UIHelp)
         {
             if(_currentInterface is UILogin) 
                 return;
@@ -48,6 +49,20 @@ public class UIManager : MonoBehaviour
         InputManager.Instance.ClientPlayerController.ControlLocked = true;
     }
 
+    public void OpenHelpWindow()
+    {
+        OpenInterface(help);
+    }
+    
+    public void CloseHelpWindow()
+    {
+        if(_currentInterface is UIHelp)
+            CloseInterface();
+        else
+            help.Close();
+        UIConnectScript.Instance.OnHelpWindowClose();
+    }
+    
     public void CloseInterface(bool force = false)
     {
         if(_currentInterface is UILogin && !force) 
@@ -55,6 +70,11 @@ public class UIManager : MonoBehaviour
         
         _currentInterface.Close();
         _currentInterface = null;
+        if (loginWindow.isActiveAndEnabled)
+        {
+            OpenInterface(loginWindow);
+            return;
+        }
         UnBlur();
         InputManager.Instance.ClientPlayerController.ControlLocked = false;
     }

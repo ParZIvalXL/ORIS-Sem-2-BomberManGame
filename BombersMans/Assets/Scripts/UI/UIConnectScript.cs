@@ -10,6 +10,7 @@ namespace NetCode
     {
         [SerializeField] private GameClientScript _gameClientScript;
         [SerializeField] public Button _connectButton;
+        [SerializeField] public Button helpButton;
         [SerializeField] private TMP_InputField _inputField;
         [SerializeField] public UILogin uiLogin;
         public static UIConnectScript Instance { get; private set; }
@@ -28,6 +29,17 @@ namespace NetCode
         private void Start()
         {
             _connectButton.onClick.AddListener(Connect);
+        }
+        
+        public void OpenHelpWindow()
+        {
+            helpButton.interactable = false;
+            UIManager.Instance.OpenHelpWindow();
+        }
+        
+        public void OnHelpWindowClose()
+        {
+            helpButton.interactable = true;
         }
     }
 }

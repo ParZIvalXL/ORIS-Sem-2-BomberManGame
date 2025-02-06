@@ -8,12 +8,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b8d803f-eda1-4368-a503-ddf856a2c5bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/GameServer/ConnectionState.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameServer/Packages/ConnectionStatusPackage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/GameController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/GameController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/MapBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/MapBuilder.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UIConnectScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UIConnectScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/UI/UIManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/ClientObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ClientObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer/ServerObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ServerObject.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +76,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;TimurBranch&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ClientFeatures&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -119,6 +127,8 @@
       <workItem from="1738540670133" duration="110000" />
       <workItem from="1738737893645" duration="120000" />
       <workItem from="1738761644161" duration="5725000" />
+      <workItem from="1738791332603" duration="1313000" />
+      <workItem from="1738846489154" duration="1222000" />
     </task>
     <servers />
   </component>

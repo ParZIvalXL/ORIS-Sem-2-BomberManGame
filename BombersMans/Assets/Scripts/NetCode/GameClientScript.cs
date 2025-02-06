@@ -8,6 +8,7 @@ using NetCode.Packages;
 using Newtonsoft.Json;
 using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NetCode
 {
@@ -17,7 +18,8 @@ namespace NetCode
         private Socket _client;
         private string _host = "127.0.0.1";
         private int _port = 8888;
-        public static GameClientScript Instance;
+        public static GameClientScript Instance; 
+        public GameObject[] BombsList;
 
         void Awake()
         {
@@ -191,10 +193,35 @@ namespace NetCode
                                 case "ConnectionStatusPackage":
                                 {
                                     var connectionStatusPackage = JsonConvert.DeserializeObject<ConnectionStatusPackage>(message);
-                                    Debug.Log($"Статус подключения. {connectionStatusPackage.ConnectionDescription} - {connectionStatusPackage.ConnectionState}");
+                                    GameController.Instance.AddAction(() =>
+                                    {
+                                        if (connectionStatusPackage.ConnectionState == 200)
+                                        {
+                                            UIManager.Instance.loadingUI.SetText("Успешно подключились!");
+                                        }
+
+                                        Debug.Log(
+                                            $"Статус подключения. {connectionStatusPackage.ConnectionDescription} - {connectionStatusPackage.ConnectionState}");
+                                    });
+                                        break;
+                                }
+                                case "BombPackage":
+                                {
+                                    var bombPackage = JsonConvert.DeserializeObject<BombPackage>(message);
+                                    Debug.Log($"Бомба появилась на позиции X: {bombPackage.PositionX}, Y:{bombPackage.PositionY}");
+                                    GameController.Instance.AddAction(() => {
+                                        var bomb = Instantiate(
+                                            BombsList[0],
+                                            new Vector3(bombPackage.PositionX, bombPackage.PositionY, 0),
+                                            Quaternion.identity);
+                                        if (bomb.TryGetComponent<BombScript>(out var bombScript))
+                                        {
+                                            bombScript.GetComponent<BombScript>().playerName = bombPackage.playerNickname;
+                                        }
+                                    });
+
                                     break;
                                 }
-                            
                                 default:
                                 {
                                     break;
