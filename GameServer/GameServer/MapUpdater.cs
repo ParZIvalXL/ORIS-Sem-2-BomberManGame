@@ -5,13 +5,13 @@ namespace GameServer.Packages;
 public static class MapUpdater
 {
     private static Random random = new Random();
-    public static void SetBomb(TileType[,] grid, BombPackage? bomb)
+    public static void SetBomb(TileType[,]? grid, BombPackage? bomb)
     {
         if (grid[bomb.PositionX, bomb.PositionY] != Bomb) return;
         grid[bomb.PositionX, bomb.PositionY] = Bomb;
     }
     
-    public static (int, int) SpawnPlayer(TileType[,] grid)
+    public static (int, int) SpawnPlayer(TileType[,]? grid)
     {
         List<(int, int)> validPositions = new List<(int, int)>();
 
@@ -44,7 +44,7 @@ public static class MapUpdater
         }
     }
 
-    private static bool IsSafe(int x, int y, TileType[,] grid)
+    private static bool IsSafe(int x, int y, TileType[,]? grid)
     {
         int rows = grid.GetLength(0);
         int cols = grid.GetLength(1);

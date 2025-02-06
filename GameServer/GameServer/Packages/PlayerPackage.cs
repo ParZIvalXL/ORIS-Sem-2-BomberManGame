@@ -13,7 +13,7 @@ public class PlayerPackage
     public float DirectionY { get; set; }
     public Double PositionX { get; set; }
     public Double PositionY { get; set; }
-    public string Type { get; set; }
+    public string Type { get; set; } = "PlayerPackage";
     public int SpawnPositionX { get; set; }
     public int SpawnPositionY { get; set; }
 }

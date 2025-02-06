@@ -8,6 +8,7 @@ using NetCode.Packages;
 using Newtonsoft.Json;
 using UI;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace NetCode
@@ -146,7 +147,7 @@ namespace NetCode
                                 case "PlayerPackage":
                                 {
                                     PlayerPackage playerPackage = JsonConvert.DeserializeObject<PlayerPackage>(message);
-                                    Debug.Log($"{playerPackage.Nickname} переместился на координаты: {playerPackage.PositionX}, {playerPackage.PositionY}");
+                                    // Debug.Log($"{playerPackage.Nickname} переместился на координаты: {playerPackage.PositionX}, {playerPackage.PositionY}");
                                     
                                     // какой то код
                                     break;
@@ -160,6 +161,10 @@ namespace NetCode
                                         Sender = "Server",
                                         Content = "Карта загружена",
                                     });
+                                    // foreach (var player in currentSession.list)
+                                    // {
+                                    //     Debug.Log(player);
+                                    // }
                                     GameController.Instance.AddAction(() =>
                                     {
                                         UIManager.Instance.loadingUI.SetText("Карта загружена! Сейчас все расставим и можно играть!");
@@ -220,6 +225,15 @@ namespace NetCode
                                         }
                                     });
 
+                                    break;
+                                }
+                                case "PlayersList":
+                                {
+                                    var package = JsonConvert.DeserializeObject<PlayerListPackage>(message);
+                                    foreach (var player in package.List)
+                                    {
+                                        var playerObj = JsonConvert.DeserializeObject<PlayerPackage>(player);
+                                    }
                                     break;
                                 }
                                 default:
