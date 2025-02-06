@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private string _playerNickname;
+    public static PlayerController Instance; 
 
     public string PlayerNickname
     {
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 5f;
     public float health = 100f;
-    private Rigidbody2D _rb;
+    public Rigidbody2D _rb;
     private Vector2 direction = Vector2.zero;
     [SerializeField] public GameObject[] Bombs;
     public bool ControlLocked { get; set ; }
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        Instance = this;
     }
 
     private void FixedUpdate()
