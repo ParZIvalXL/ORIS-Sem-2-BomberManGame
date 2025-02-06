@@ -9,6 +9,7 @@ public class PlayerPackage
     public float Speed  { get; set; }
     public float Health { get; set; }
     public float DirectionX { get; set; }
+    
     public float DirectionY { get; set; }
     public Double PositionX { get; set; }
     public Double PositionY { get; set; }

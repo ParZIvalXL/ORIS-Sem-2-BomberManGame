@@ -63,24 +63,25 @@ class ClientHandler
             };
 
             server.BroadcastPackage(connectionStatusPackage, this);
+            
             while (true)
             {
                 try
                 {
                     var buffer = new byte[1024];
                     int receivedBytes = clientSocket.Receive(buffer);
-                    if (receivedBytes == 0) break; // Соединение закрыто клиентом
+                    if (receivedBytes == 0) break;
 
                     string mess = Encoding.UTF8.GetString(buffer, 0, receivedBytes);
-                    receivedData.Append(mess); // Добавляем в буфер
+                    receivedData.Append(mess);
 
-                    while (receivedData.ToString().Contains("\n")) // Если есть завершенный JSON
+                    while (receivedData.ToString().Contains("\n"))
                     {
                         string[] messages = receivedData.ToString().Split(new[] { '\n' }, 2);
-                        string json = messages[0].Trim(); // Первый завершенный JSON
+                        string json = messages[0].Trim();
                         receivedData.Clear();
                         if (messages.Length > 1)
-                            receivedData.Append(messages[1]); // Оставляем остаток (если есть)
+                            receivedData.Append(messages[1]);
 
                         try
                         {

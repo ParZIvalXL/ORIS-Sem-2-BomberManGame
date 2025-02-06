@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection;
+        SendPlayerPackage();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -87,6 +88,22 @@ public class PlayerController : MonoBehaviour
         gameObject.SetActive(false);
         UIManager.Instance.ShowGameOver("Вы были убиты собственной бомбой... ", PlayerGameEndReason.DeadByHimself);
         // Вызов проверки состояния игры для текущего игрока (проиграл, причина смерти, победа, и т.д.)
+    }
+
+    public void SendPlayerPackage()
+    {
+        var playerPackage = new PlayerPackage
+        {
+            Nickname = GameClientScript.Instance.playerName,
+            Speed = speed,
+            Health = health,
+            DirectionX = direction.x,
+            DirectionY = direction.y,
+            PositionX = transform.position.x,
+            PositionY = transform.position.y
+        };
+        
+        GameClientScript.Instance.SendPlayerPackage(playerPackage);
     }
 }
 
