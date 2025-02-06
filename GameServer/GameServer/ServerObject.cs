@@ -15,8 +15,7 @@ class Server
     private Socket listenerSocket;
     private List<ClientHandler> clients = new List<ClientHandler>();
     private readonly int port;
-    public TileType[,] _map;
-    public PlayersListPackage _playersListPackage;
+    public TileType[,]? _map;
 
     public Server(int port)
     {
@@ -61,6 +60,7 @@ class Server
     public void BroadcastPackage(object? obj, ClientHandler sender)
     {
         var message = JsonConvert.SerializeObject(obj);
+        Console.WriteLine(message);
         if (typeof(CurrentSession) == obj.GetType() && sender == clients[clients.Count - 1])
         {
             sender.SendMessage(message);

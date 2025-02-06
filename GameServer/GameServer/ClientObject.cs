@@ -15,6 +15,7 @@ class ClientHandler
     public string clientName = "Unknown";
     private bool connected;
     private StringBuilder receivedData = new StringBuilder();
+    private List<string> _playersListPackage = new List<string>();
 
     public ClientHandler(Socket socket, Server server)
     {
@@ -31,19 +32,16 @@ class ClientHandler
             int recB = clientSocket.Receive(buff);
             clientName = Encoding.UTF8.GetString(buff, 0, recB).Trim();
             Console.WriteLine($"{clientName} подключился к игре.");
-            server._playersListPackage._players.Add(new PlayerPackage
+            _playersListPackage.Add(JsonConvert.SerializeObject(new PlayerPackage
             {
                 Nickname = clientName,
-            });
-            
+            }));
             var newClient = new MessagePackage
             {
                 Sender = null,
                 Content = $"{clientName} подключился к игре",
                 Type = "MessagePackage"
             };
-            server.BroadcastPackage(newClient, this);
-
             var spawnPlayerPackage = new PlayerPackage
             {
                 Nickname = clientName,
@@ -51,24 +49,26 @@ class ClientHandler
                 SpawnPositionY = MapUpdater.SpawnPlayer(server._map).Item2,
                 Type = "SpawnPlayer"
             };
-
-            server.BroadcastPackage(spawnPlayerPackage, this);
-
             var curentSession = new CurrentSession
             {
                 grid = server._map,
                 Type = nameof(CurrentSession)
             };
-
+            server.BroadcastPackage(newClient, this);
+            server.BroadcastPackage(spawnPlayerPackage, this);
             server.BroadcastPackage(curentSession, this);
-
+            
             var connectionStatusPackage = new ConnectionStatusPackage
             {
                 ConnectionState = (int)ConnectionState.Successful,
                 ConnectionDescription = ConnectionState.Successful.ToString()
             };
-
             server.BroadcastPackage(connectionStatusPackage, this);
+            server.BroadcastPackage(new PlayerListPackage
+            {
+                Type = "PlayersList",
+                List = _playersListPackage
+            }, this);
             
             
             while (true)
@@ -100,17 +100,19 @@ class ClientHandler
                                 case "PlayerPackage":
                                 {
                                     PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(json);
-                                    foreach (var player in server._playersListPackage._players)
+                                    if (_playersListPackage.Count != 0)
                                     {
-                                        if (player.Nickname == package.Nickname)
+                                        foreach (var player in _playersListPackage)
                                         {
-                                            player.PositionX = package.PositionX;
-                                            player.PositionY = package.PositionY;
-                                            player.Health = package.Health;
+                                            var a = JsonConvert.DeserializeObject<PlayerPackage>(player);
+                                            if (a.Nickname == package.Nickname)
+                                            {
+                                                a.DirectionX = package.DirectionX;
+                                                a.DirectionY = package.DirectionY;
+                                                a.Health = package.Health;
+                                            }
                                         }
                                     }
-                                    server.BroadcastPackage(server._playersListPackage, this);
-                                    Console.WriteLine("Отправили");
                                     server.BroadcastPackage(package, this);
                                     break;
                                 }

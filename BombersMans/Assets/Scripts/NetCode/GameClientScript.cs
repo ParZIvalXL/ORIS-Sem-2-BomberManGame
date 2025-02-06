@@ -8,6 +8,7 @@ using NetCode.Packages;
 using Newtonsoft.Json;
 using UI;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace NetCode
@@ -146,7 +147,7 @@ namespace NetCode
                                 case "PlayerPackage":
                                 {
                                     PlayerPackage playerPackage = JsonConvert.DeserializeObject<PlayerPackage>(message);
-                                    Debug.Log($"{playerPackage.Nickname} переместился на координаты: {playerPackage.PositionX}, {playerPackage.PositionY}");
+                                    // Debug.Log($"{playerPackage.Nickname} переместился на координаты: {playerPackage.PositionX}, {playerPackage.PositionY}");
                                     
                                     // какой то код
                                     break;
@@ -222,17 +223,13 @@ namespace NetCode
 
                                     break;
                                 }
-
-                                case "PlayersListPackage":
+                                case "PlayersList":
                                 {
-                                    Debug.Log("Вошли");
-                                    // var package = JsonConvert.DeserializeObject<PlayersListPackage>(message);
-                                    // Debug.Log(package);
-                                    // var playersList = package._players;
-                                    // foreach (var player in playersList)
-                                    // {
-                                    //     Debug.Log(player.Nickname + "KJFHGEFKJL:NLIVGCVBUONKL");
-                                    // }
+                                    var package = JsonConvert.DeserializeObject<PlayerListPackage>(message);
+                                    foreach (var player in package.List)
+                                    {
+                                        var playerObj = JsonConvert.DeserializeObject<PlayerPackage>(player);
+                                    }
                                     break;
                                 }
                                 default:
