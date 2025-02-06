@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
             OnDeathSequenceEnded();
             // Вызов смерти
         }
+        UIManager.Instance.UpdateHealthBar();
     }
     private void OnDeathSequenceEnded()
     {

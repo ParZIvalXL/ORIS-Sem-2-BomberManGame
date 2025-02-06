@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public LoadingUI loadingUI;
     public UIHelp help;
     public IInterface CurrentInterface => _currentInterface;
+    [SerializeField] private GameUIScript gameUIScript;
     public bool HasCurrentInterface => _currentInterface != null;
 
     public static UIManager Instance;
@@ -23,6 +24,11 @@ public class UIManager : MonoBehaviour
     {
         InputManager.Instance.ResetPlayerMovement();
         OpenInterface(chatWindow);
+    }
+
+    public void UpdateHealthBar()
+    {
+        gameUIScript.SetHealth(PlayerController.Instance.health);
     }
 
     public void Blur()
@@ -37,6 +43,11 @@ public class UIManager : MonoBehaviour
     public void OpenInterface(IInterface newInterface)
     {
         Debug.Log("OpenInterface " + newInterface);
+        if (newInterface is UILogin)
+        {
+            gameUIScript.gameObject.SetActive(false);
+        }
+        
         if (HasCurrentInterface && newInterface is not UIHelp)
         {
             if(_currentInterface is UILogin) 
@@ -67,6 +78,8 @@ public class UIManager : MonoBehaviour
     {
         if(_currentInterface is UILogin && !force) 
             return;
+        else
+            gameUIScript.gameObject.SetActive(false);
         
         _currentInterface.Close();
         _currentInterface = null;

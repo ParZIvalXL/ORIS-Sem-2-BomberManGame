@@ -13,6 +13,7 @@ namespace NetCode
         [SerializeField] public Button helpButton;
         [SerializeField] private TMP_InputField _inputField;
         [SerializeField] public UILogin uiLogin;
+        [SerializeField] public TMP_Text errorText;
         public static UIConnectScript Instance { get; private set; }
 
         private void Awake()
@@ -23,6 +24,13 @@ namespace NetCode
         private async void Connect()
         {
             string playerName = _inputField.text;
+            if (playerName.Length == 0)
+            {
+                ShowErrorText("Введи никнейм!");
+                return;
+            }
+
+            HideErrorText();
             await _gameClientScript.ConnectingPlayer(playerName);
         }
 
@@ -40,6 +48,17 @@ namespace NetCode
         public void OnHelpWindowClose()
         {
             helpButton.interactable = true;
+        }
+
+        public void HideErrorText()
+        {
+            errorText.gameObject.SetActive(false);
+        }
+
+        public void ShowErrorText(string text)
+        {
+            errorText.text = text;
+            errorText.gameObject.SetActive(true);
         }
     }
 }

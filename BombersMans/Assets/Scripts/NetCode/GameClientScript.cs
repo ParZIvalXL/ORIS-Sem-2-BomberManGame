@@ -241,6 +241,7 @@ namespace NetCode
         {
             var prefix = messagePackage.Sender == null ? messagePackage.Sender + ": " : "";
             string message = prefix + messagePackage.Content;
+            Debug.Log(message);
             if(ChatScript.Instance != null)
                 ChatScript.Instance.CreateNewMessage(message);
         }
