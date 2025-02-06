@@ -8,6 +8,7 @@ namespace GameServer
         private const float Tolerance = 0.05f;
 
         public static int[] GetPlayerCoordinates(PlayerPackage player)
+        
         {
             int gridX = GetGridCoordinate(player.PositionX);
             int gridY = GetGridCoordinate(player.PositionY);
