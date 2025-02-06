@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealthBar()
     {
-        gameUIScript.SetHealth(PlayerController.Instance.health);
+        gameUIScript.SetHealth(PlayerController.Instance.health/100f);
     }
 
     public void Blur()
@@ -78,8 +78,9 @@ public class UIManager : MonoBehaviour
     {
         if(_currentInterface is UILogin && !force) 
             return;
-        else
-            gameUIScript.gameObject.SetActive(false);
+        
+        if(_currentInterface is UILogin && force)
+            gameUIScript.gameObject.SetActive(true);
         
         _currentInterface.Close();
         _currentInterface = null;

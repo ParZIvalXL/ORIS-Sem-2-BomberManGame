@@ -12952,7 +12952,7 @@ MonoBehaviour:
   blur: {fileID: 250345296}
   loadingUI: {fileID: 461893075}
   help: {fileID: 1715254745}
-  gameUIScript: {fileID: 0}
+  gameUIScript: {fileID: 1189753417}
 --- !u!95 &1629516653
 Animator:
   serializedVersion: 7
