@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Text;
 using NetCode;
 using NetCode.Packages;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -23,8 +25,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     public float health = 100f;
     private Rigidbody2D _rb;
-    private Vector2 direction = Vector2.zero;
+    public Vector2 direction = Vector2.zero;
     [SerializeField] public GameObject[] Bombs;
+    public static PlayerController Instance;
     public bool ControlLocked { get; set ; }
     
     
@@ -61,6 +64,7 @@ public class PlayerController : MonoBehaviour
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection;
+        SendPlayerDate();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -85,6 +89,22 @@ public class PlayerController : MonoBehaviour
         gameObject.SetActive(false);
         UIManager.Instance.ShowGameOver("Вы были убиты собственной бомбой... ", PlayerGameEndReason.DeadByHimself);
         // Вызов проверки состояния игры для текущего игрока (проиграл, причина смерти, победа, и т.д.)
+    }
+    
+    private void SendPlayerDate()
+    {
+        PlayerPackage player = new PlayerPackage
+        {
+            Nickname = GameClientScript.Instance.playerName,
+            Speed = speed,
+            Health = health,
+            DirectionX = direction.x,
+            DirectionY = direction.y,
+            PositionX = transform.position.x,
+            PositionY = transform.position.y,
+        };
+        
+        GameClientScript.Instance.SendPlayerPackage(player);
     }
 }
 

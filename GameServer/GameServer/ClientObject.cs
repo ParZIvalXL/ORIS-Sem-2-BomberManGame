@@ -13,6 +13,7 @@ class ClientHandler
     private readonly Server server;
     public string clientName = "Unknown";
     private bool connected;
+    private StringBuilder receivedData = new StringBuilder();
 
     public ClientHandler(Socket socket, Server server)
     {
@@ -20,8 +21,8 @@ class ClientHandler
         this.server = server;
         connected = true;
     }
-    
-    public async Task HandleClient()
+
+    public void HandleClient()
     {
         try
         {
@@ -36,7 +37,7 @@ class ClientHandler
                 Type = "MessagePackage"
             };
             server.BroadcastPackage(newClient, this);
-            
+
             var spawnPlayerPackage = new PlayerPackage
             {
                 Nickname = clientName,
@@ -44,15 +45,15 @@ class ClientHandler
                 SpawnPositionY = MapUpdater.SpawnPlayer(server._map).Item2,
                 Type = "SpawnPlayer"
             };
-                
+
             server.BroadcastPackage(spawnPlayerPackage, this);
-                    
+
             var curentSession = new CurrentSession
             {
                 grid = server._map,
                 Type = nameof(CurrentSession)
             };
-                
+
             server.BroadcastPackage(curentSession, this);
 
             var connectionStatusPackage = new ConnectionStatusPackage
@@ -60,73 +61,82 @@ class ClientHandler
                 ConnectionState = (int)ConnectionState.Successful,
                 ConnectionDescription = ConnectionState.Successful.ToString()
             };
-            
-            server.BroadcastPackage(connectionStatusPackage, this);
 
+            server.BroadcastPackage(connectionStatusPackage, this);
             while (true)
             {
                 try
                 {
                     var buffer = new byte[1024];
                     int receivedBytes = clientSocket.Receive(buffer);
-                    var mess = Encoding.UTF8.GetString(buffer, 0, receivedBytes).Trim();
-                    try
+                    if (receivedBytes == 0) break; // Соединение закрыто клиентом
+
+                    string mess = Encoding.UTF8.GetString(buffer, 0, receivedBytes);
+                    receivedData.Append(mess); // Добавляем в буфер
+
+                    while (receivedData.ToString().Contains("\n")) // Если есть завершенный JSON
                     {
-                        var messageObject = JsonConvert.DeserializeObject<Dictionary<string, string>>(mess);
-                        string typeObj = messageObject["Type"];
-                        switch (typeObj)
+                        string[] messages = receivedData.ToString().Split(new[] { '\n' }, 2);
+                        string json = messages[0].Trim(); // Первый завершенный JSON
+                        receivedData.Clear();
+                        if (messages.Length > 1)
+                            receivedData.Append(messages[1]); // Оставляем остаток (если есть)
+
+                        try
                         {
-                            case "PlayerPackage":
+                            var messageObject = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                            string typeObj = messageObject["Type"];
+
+                            switch (typeObj)
                             {
-                                PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(mess);
-                                Console.WriteLine($"Игрок передвинулся: X={package.PositionX}, Y={package.PositionY}");
-                                server.BroadcastPackage(package, this);
-                                break;
-                            }
-                            case "MessagePackage":
-                            {
-                                MessagePackage? package = JsonConvert.DeserializeObject<MessagePackage>(mess);
-                                Console.WriteLine($"{package.Sender}: {package.Content}");
-                                server.BroadcastPackage(package, this);
-                                break;
-                            }
-                            case "BombPackage":
-                            {
-                                BombPackage? package = JsonConvert.DeserializeObject<BombPackage>(mess);
-                                Console.WriteLine($"Игрок {package.playerNickname} поставил бомбу {package.BombType} " +
-                                                  $"по координатам X:{package.PositionX}, Y:{package.PositionY}");
-                                MapUpdater.SetBomb(server._map, package);
-                                server.BroadcastPackage(package, this);
-                                break;
-                            }
-                            case "CurrentPackage":
-                            {
-                                break;
+                                case "PlayerPackage":
+                                {
+                                    PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(json);
+                                    server.BroadcastPackage(package, this);
+                                    break;
+                                }
+                                case "MessagePackage":
+                                {
+                                    MessagePackage? package = JsonConvert.DeserializeObject<MessagePackage>(json);
+                                    Console.WriteLine($"{package.Sender}: {package.Content}");
+                                    server.BroadcastPackage(package, this);
+                                    break;
+                                }
+                                case "BombPackage":
+                                {
+                                    BombPackage? package = JsonConvert.DeserializeObject<BombPackage>(json);
+                                    Console.WriteLine(
+                                        $"Игрок {package.playerNickname} поставил бомбу {package.BombType} " +
+                                        $"по координатам X:{package.PositionX}, Y:{package.PositionY}");
+                                    MapUpdater.SetBomb(server._map, package);
+                                    server.BroadcastPackage(package, this);
+                                    break;
+                                }
+                                case "CurrentPackage":
+                                {
+                                    break;
+                                }
                             }
                         }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e +  e.Message);
-                        throw;
+                        catch (JsonException e)
+                        {
+                            Console.WriteLine($"Ошибка десериализации: {e.Message}");
+                        }
                     }
                 }
-                catch  
+                catch (SocketException)
                 {
                     Console.WriteLine($"{clientName} отключился.");
                     server.BroadcastPackage($"Игрок {clientName} отключился от игры", this);
                     break;
                 }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Ошибка: {e.Message}");
+                }
             }
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Ошибка клиента: {ex.Message}");
-        }
-        finally
-        {
-            Disconnect();
-        }
+        finally{}
     }
 
     public void SendMessage(string message)
@@ -136,9 +146,8 @@ class ClientHandler
             var data = Encoding.UTF8.GetBytes(message + "\n");
             clientSocket.Send(data);
         }
-        catch
-        {
-            Disconnect();
+        catch 
+        { Disconnect();
         }
     }
 
