@@ -15,9 +15,9 @@ namespace GameServer
             return new []{ gridX, gridY };
         }
 
-        private static int GetGridCoordinate(float position)
+        private static int GetGridCoordinate(double position)
         {
-            float adjustedPosition = position + Tolerance;
+            var adjustedPosition = position + Tolerance;
             int gridCoordinate = (int)Math.Floor(adjustedPosition);
             return gridCoordinate;
         }

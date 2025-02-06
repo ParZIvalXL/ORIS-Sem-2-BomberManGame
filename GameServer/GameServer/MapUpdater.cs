@@ -5,7 +5,7 @@ namespace GameServer.Packages;
 public static class MapUpdater
 {
     private static Random random = new Random();
-    public static void SetBomb(TileType[,] grid, BombPackage bomb)
+    public static void SetBomb(TileType[,] grid, BombPackage? bomb)
     {
         if (grid[bomb.PositionX, bomb.PositionY] != Bomb) return;
         grid[bomb.PositionX, bomb.PositionY] = Bomb;

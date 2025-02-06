@@ -8,7 +8,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private string _playerNickname;
-    public static PlayerController Instance;
 
     public string PlayerNickname
     {
@@ -23,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 5f;
     public float health = 100f;
-    public Rigidbody2D _rb;
+    private Rigidbody2D _rb;
     private Vector2 direction = Vector2.zero;
     [SerializeField] public GameObject[] Bombs;
     public bool ControlLocked { get; set ; }
@@ -38,22 +37,16 @@ public class PlayerController : MonoBehaviour
     public void SpawnBomb(int index)
     {
         var spawnPosition = GetIntPosition();
-        Debug.Log("Bomb spawned at " + spawnPosition);
-        /*
-         var bomb = Instantiate(Bombs[index], spawnPosition, Quaternion.identity);
+        var bomb = Instantiate(Bombs[index], spawnPosition, Quaternion.identity);
         if (bomb.TryGetComponent<BombScript>(out var bombScript))
         {
             bombScript.name = _playerNickname;
         }
-        */
-
-        
-        GameClientScript.Instance.SendBombPackage(new Vector2(spawnPosition.x, spawnPosition.y));
+        GameClientScript.Instance.SendBombPackage(spawnPosition);
     }
 
     private void Awake()
     {
-        Instance = this;
         _rb = GetComponent<Rigidbody2D>();
     }
 

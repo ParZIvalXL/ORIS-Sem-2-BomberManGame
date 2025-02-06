@@ -57,10 +57,11 @@ public class InputManager : MonoBehaviour
                 _clientPlayerController.SetDirection(Vector2.up * verInp + Vector2.right * horInp);
             else
                 _clientPlayerController.SetDirection(Vector2.zero);
-
             if (Input.GetKeyDown(KeyCode.Space)) _clientPlayerController.SpawnBomb(0);
         }
     }
+
+    
 
     public void ResetPlayerMovement()
     {

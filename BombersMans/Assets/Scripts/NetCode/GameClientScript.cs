@@ -261,8 +261,10 @@ namespace NetCode
 
         public async void SendPlayerPackage(PlayerPackage player)
         {
-            var playerPackage = JsonConvert.SerializeObject(player);
-            
+            var playerPackage = JsonConvert.SerializeObject(player , new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
             await SendMessagesAsync(playerPackage);
         }
     }
