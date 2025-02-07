@@ -84,6 +84,28 @@ class Server
             }
         }
     }
+    
+    public void BroadcastPackage(string json, object? obj, ClientHandler sender)
+    {
+        if (typeof(CurrentSession) == obj.GetType() && sender == clients[clients.Count - 1])
+        {
+            sender.SendMessage(json);
+            return;
+        }
+
+        foreach (var client in clients)
+        {
+            try
+            {
+                client.SendMessage(json);
+            }
+            catch
+            {
+                clients.Remove(client);
+                client.Disconnect();
+            }
+        }
+    }
 
     public void RemoveClient(ClientHandler client)
     {

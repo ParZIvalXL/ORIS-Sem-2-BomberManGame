@@ -120,6 +120,14 @@ class ClientHandler
                                         }
                                     }
 
+                                    string x = "\nplayers: \n";
+                                    foreach (var a in _playersListPackage)
+                                    {
+                                        x += a + "\n";
+                                    }
+                                    
+                                    Console.WriteLine(x);
+                                    
                                     if (!timeOut)
                                     {
                                         var playerListPackage = new PlayerListPackage
