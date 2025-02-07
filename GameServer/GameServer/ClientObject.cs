@@ -16,6 +16,7 @@ class ClientHandler
     private bool connected;
     private StringBuilder receivedData = new StringBuilder();
     public static List<string> _playersListPackage = new List<string>();
+    public bool timeOut = false;
 
     public ClientHandler(Socket socket, Server server)
     {
@@ -81,8 +82,6 @@ class ClientHandler
                 List = _playersListPackage
             };
             server.BroadcastPackage(connectionStatusPackage, this);
-            SendListPackage(playerListPackage);
-            
             
             while (true)
             {
@@ -120,18 +119,19 @@ class ClientHandler
                                             var player = JsonConvert.DeserializeObject<PlayerPackage>(_playersListPackage[i]);
                                             if (player.Nickname == package.Nickname)
                                             {
-                                                // Обновляем позиции игрока
                                                 player.PositionX = package.PositionX;
                                                 player.PositionY = package.PositionY;
-
-                                                // Сериализуем обратно и обновляем список
                                                 _playersListPackage[i] = JsonConvert.SerializeObject(player);
                                                 break;
                                             }
                                         }
-                                        SendListPackage(playerListPackage);
+
+                                        if (!timeOut)
+                                        {
+                                            server.BroadcastPackage(playerListPackage, this);
+                                            StartTimeOut();
+                                        }
                                     }
-                                    server.BroadcastPackage(package, this);
                                     Console.WriteLine(json);
                                     break;
                                 }
@@ -176,10 +176,11 @@ class ClientHandler
         finally{}
     }
 
-    public async Task SendListPackage(PlayerListPackage package)
+    public async Task StartTimeOut()
     {
+        timeOut = true;
         await Task.Delay(1000);
-        server.BroadcastPackage(package, this);
+        timeOut = false;
     }
 
     public void SendMessage(string message)
