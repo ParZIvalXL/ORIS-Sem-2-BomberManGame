@@ -7,7 +7,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public bool IsChatOpen = false;
-    [SerializeField] private UILogin loginWindow;
+    [SerializeField] public UILogin loginWindow;
     [SerializeField] private UIChat chatWindow;
     public GameOverScreen gameOverScreen;
     public UIGameOver gameEndScreen;

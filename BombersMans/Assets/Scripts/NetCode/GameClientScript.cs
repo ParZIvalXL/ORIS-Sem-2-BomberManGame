@@ -203,6 +203,9 @@ namespace NetCode
                                         else if (connectionStatusPackage.ConnectionState == 400 || 
                                                  connectionStatusPackage.ConnectionState == 404)
                                         {
+                                            UIManager.Instance.OpenInterface(UIManager.Instance.loginWindow);
+                                            LoadingUI.Instance.SetText("Отключено от сервера!");
+                                            LoadingUI.Instance.HideLoader(true);
                                             UIConnectScript.Instance.ShowErrorText(connectionStatusPackage
                                                 .ConnectionDescription);
                                         }
