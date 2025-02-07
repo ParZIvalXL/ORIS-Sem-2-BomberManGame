@@ -16,16 +16,18 @@ public class MapBuilder : MonoBehaviour
     public Tile floorTile;
     public Tile boundsTile;
     public BoxCollider2D CameraBorder;
+    public TileType[,] mapMemory;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public void GenerateMap(CurrentSession session)
+    public void GenerateMap(CurrentSession session = null)
     {
         ClearMap();
-        var mapToBuild = session.grid;
+        TileType[,] mapToBuild = null;
+        mapToBuild = session.grid ?? mapMemory;
         var mapX = mapToBuild.GetLength(0);
         var mapY = mapToBuild.GetLength(1);
         Debug.Log("X: " +  mapX + " Y: " + mapY);

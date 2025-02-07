@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private string _playerNickname;
     public static PlayerController Instance; 
     private bool timeOut = false;
+    public bool isClient = false;
 
     public string PlayerNickname
     {
@@ -26,7 +27,14 @@ public class PlayerController : MonoBehaviour
     }
 
     public float speed = 5f;
-    public float health = 100f;
+    private float _health = 100f;
+    public float health { get => _health; 
+        set 
+        {
+        _health = value;
+        UIManager.Instance.UpdateHealthBar();
+        } 
+    }
     public Rigidbody2D _rb;
     private Vector2 direction = Vector2.zero;
     [SerializeField] public GameObject[] Bombs;
@@ -68,7 +76,8 @@ public class PlayerController : MonoBehaviour
     public void SetDirection(Vector2 newDirection)
     {
         direction = newDirection;
-        SendPlayerPackage();
+        if(isClient)
+            SendPlayerPackage();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

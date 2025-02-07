@@ -43,7 +43,6 @@ public class BombScript : MonoBehaviour
                 // Переделать под триггер вызрыва
                 if(!hit.collider.TryGetComponent(out PlayerController playerController))
                     return;
-                playerController.TakeDamage(damage);
             }
             
             hit = Physics2D.Raycast(transform.position, direction, 100f, explosionLayerMask);
