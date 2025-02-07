@@ -16,6 +16,7 @@ class Server
     private List<ClientHandler> clients = new List<ClientHandler>();
     private readonly int port;
     public TileType[,]? _map;
+    public bool IsStarted { get; private set; } = false;
 
     public Server(int port)
     {
@@ -35,17 +36,40 @@ class Server
             {
                 var clientSocket = listenerSocket.Accept();
                 var clientHandler = new ClientHandler(clientSocket, this);
-                if (clients.Count >= 4)
-                {
-                    var answer = new ConnectionStatusPackage
-                    {
-                        ConnectionState = 400,
-                        ConnectionDescription = "FullLobby"
-                    };
-                    BroadcastPackage(answer, clientHandler);
-                }
                 clients.Add(clientHandler);
+                if (clients.Count >= 2)
+                {
+                    IsStarted = true;
+                    var answerStartedGame = new ConnectionStatusPackage
+                    {
+                        ConnectionState = 100,
+                        ConnectionDescription = "Игра началась"
+                    };
+                    BroadcastPackage(answerStartedGame, clientHandler);
+                    if (clients.Count > 4)
+                    {
+                        var answer = new ConnectionStatusPackage
+                        {
+                            ConnectionState = 400,
+                            ConnectionDescription = "Полное лобби"
+                        };
+                        BroadcastPackage(answer, clientHandler);
+                        clients.Remove(clientHandler);
+                        clientHandler.Disconnect();
+                    }
+                }
+                
                 Task.Run(() => clientHandler.HandleClient());
+                if (!IsStarted)
+                {
+                    IsStarted = false;
+                    var answerEnd = new ConnectionStatusPackage
+                    {
+                        ConnectionState = 101,
+                        ConnectionDescription = "Игра завершилась"
+                    };
+                    BroadcastPackage(answerEnd, clientHandler);
+                }
             }
         }
         catch (SocketException ex)
