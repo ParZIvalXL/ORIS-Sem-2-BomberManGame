@@ -75,12 +75,13 @@ class ClientHandler
                 ConnectionState = (int)ConnectionState.Successful,
                 ConnectionDescription = ConnectionState.Successful.ToString()
             };
-            server.BroadcastPackage(connectionStatusPackage, this);
-            server.BroadcastPackage(new PlayerListPackage
+            var playerListPackage = new PlayerListPackage
             {
                 Type = "PlayersList",
                 List = _playersListPackage
-            }, this);
+            };
+            server.BroadcastPackage(connectionStatusPackage, this);
+            SendListPackage(playerListPackage);
             
             
             while (true)
@@ -114,7 +115,6 @@ class ClientHandler
                                     PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(json);
                                     if (_playersListPackage.Count != 0)
                                     {
-                                        // Найти и обновить позицию игрока в списке
                                         for (int i = 0; i < _playersListPackage.Count; i++)
                                         {
                                             var player = JsonConvert.DeserializeObject<PlayerPackage>(_playersListPackage[i]);
@@ -129,8 +129,10 @@ class ClientHandler
                                                 break;
                                             }
                                         }
+                                        SendListPackage(playerListPackage);
                                     }
                                     server.BroadcastPackage(package, this);
+                                    Console.WriteLine(json);
                                     break;
                                 }
                                 case "MessagePackage":
@@ -172,6 +174,12 @@ class ClientHandler
             }
         }
         finally{}
+    }
+
+    public async Task SendListPackage(PlayerListPackage package)
+    {
+        await Task.Delay(1000);
+        server.BroadcastPackage(package, this);
     }
 
     public void SendMessage(string message)
