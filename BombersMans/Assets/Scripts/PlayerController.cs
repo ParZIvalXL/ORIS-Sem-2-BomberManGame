@@ -2,6 +2,7 @@
 using NetCode;
 using NetCode.Packages;
 using NUnit.Framework;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -16,7 +17,8 @@ public class PlayerController : MonoBehaviour
 
         set
         {
-            if (_playerNickname == null) return;
+            if (string.IsNullOrEmpty(value)) return;
+            nicknameText.text = value;
             _playerNickname = value;
         }
     }
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D _rb;
     private Vector2 direction = Vector2.zero;
     [SerializeField] public GameObject[] Bombs;
+    [SerializeField] private TMP_Text nicknameText;
     public bool ControlLocked { get; set ; }
     
     

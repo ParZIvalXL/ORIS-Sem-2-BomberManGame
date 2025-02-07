@@ -74,6 +74,7 @@ public class MapBuilder : MonoBehaviour
             Debug.Log("Teleporting player to " + playerPackage.SpawnPositionX + ", " + playerPackage.SpawnPositionY);
             var spawnPoint = new Vector3(playerPackage.SpawnPositionX + 1f, playerPackage.SpawnPositionY + 1f, 0);
             PlayerController.Instance._rb.position = spawnPoint;
+            PlayerController.Instance.PlayerNickname = playerPackage.Nickname;
             PlayerController.Instance.transform.position = spawnPoint;
         }
     }
