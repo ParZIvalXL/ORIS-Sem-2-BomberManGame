@@ -238,6 +238,12 @@ namespace NetCode
                                     }
                                     break;
                                 }
+
+                                case "PlayerConnectionPackage":
+                                {
+                                    var package = JsonConvert.DeserializeObject<PlayerConnectionPackage>(message);
+                                    break;
+                                }
                                 default:
                                 {
                                     break;

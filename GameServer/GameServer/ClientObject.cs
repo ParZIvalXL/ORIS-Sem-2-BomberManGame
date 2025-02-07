@@ -49,6 +49,13 @@ class ClientHandler
             {
                 Nickname = clientName,
             }));
+
+            var playerConnected = new PlayerConnectionPackage
+            {
+                PlayerName = clientName,
+                CodeConnection = 1,
+                Type = nameof(PlayerConnectionPackage)
+            };
             var newClient = new MessagePackage
             {
                 Sender = null,
@@ -77,6 +84,7 @@ class ClientHandler
                 ConnectionDescription = ConnectionState.Successful.ToString()
             };
             server.BroadcastPackage(connectionStatusPackage, this);
+            server.BroadcastPackage(playerConnected, this);
             
             while (true)
             {
@@ -195,6 +203,13 @@ class ClientHandler
 
     public void Disconnect()
     {
+        var answer = new PlayerConnectionPackage
+        {
+            PlayerName = clientName,
+            CodeConnection = 0,
+            Type = nameof(PlayerConnectionPackage)
+        };
+        server.BroadcastPackage(answer, this);
         connected = false;
         clientSocket.Close();
         server.RemoveClient(this);
