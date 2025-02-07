@@ -7,20 +7,17 @@ namespace GameServer
     {
         private const float Tolerance = 0.05f;
 
-        public static int[] GetPlayerCoordinates(PlayerPackage player)
-        
+        public static (int, int) GetPlayerCoordinates(PlayerPackage player)
         {
             int gridX = GetGridCoordinate(player.PositionX);
             int gridY = GetGridCoordinate(player.PositionY);
-
-            return new []{ gridX, gridY };
+            return (gridX, gridY);
         }
 
         private static int GetGridCoordinate(double position)
         {
             var adjustedPosition = position + Tolerance;
-            int gridCoordinate = (int)Math.Floor(adjustedPosition);
-            return gridCoordinate;
+            return (int)Math.Floor(adjustedPosition);
         }
     }
 }
