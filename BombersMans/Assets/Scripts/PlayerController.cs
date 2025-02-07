@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using NetCode;
 using NetCode.Packages;
 using NUnit.Framework;
@@ -9,6 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     private string _playerNickname;
     public static PlayerController Instance; 
+    private bool timeOut = false;
 
     public string PlayerNickname
     {
@@ -91,7 +93,7 @@ public class PlayerController : MonoBehaviour
         // Вызов проверки состояния игры для текущего игрока (проиграл, причина смерти, победа, и т.д.)
     }
 
-    public void SendPlayerPackage()
+    public async Task SendPlayerPackage()
     {
         var playerPackage = new PlayerPackage
         {
@@ -103,8 +105,19 @@ public class PlayerController : MonoBehaviour
             PositionX = transform.position.x,
             PositionY = transform.position.y
         };
+        if (!timeOut)
+        {
+            GameClientScript.Instance.SendPlayerPackage(playerPackage);
+            StartTimeOut();
+        }
         
-        GameClientScript.Instance.SendPlayerPackage(playerPackage);
+    }
+
+    public async Task StartTimeOut()
+    {
+        timeOut = true;
+        await Task.Delay(1000);
+        timeOut = false;
     }
 }
 

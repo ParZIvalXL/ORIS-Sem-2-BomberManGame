@@ -10,7 +10,7 @@ public static class MapUpdater
         if (grid[bomb.PositionX, bomb.PositionY] == Bomb) return;
         grid[bomb.PositionX, bomb.PositionY] = Bomb;
         
-        await Task.Delay(3000);
+            await Task.Delay(3000);
         Console.WriteLine("Бомба взорвалась!");
 
         var bombScript = new BombScripts();
