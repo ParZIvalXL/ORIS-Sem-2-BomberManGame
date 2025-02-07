@@ -66,6 +66,7 @@ class ClientHandler
                     ConnectionDescription = "Такой игрок уже есть"
                 };
                 server.BroadcastPackage(answer, this);
+                Disconnect();
             }
 
             var playerConnected = new PlayerConnectionPackage

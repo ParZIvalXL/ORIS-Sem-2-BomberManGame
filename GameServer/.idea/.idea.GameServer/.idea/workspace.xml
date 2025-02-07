@@ -29,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="TimurBranch" />
+        <entry key="$PROJECT_DIR$/.." value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -48,33 +48,21 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/Packages/PlayersListPackage.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../BombersMans/Assets/Scripts/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/BombersMans/Assets/Scripts/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/Maps.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/Maps.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ServerObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ServerObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ServerObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ServerObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
   <component name="ProblemsViewState">
@@ -88,22 +76,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Project.GameServer.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;TimurBranch&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Project.GameServer.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="GameServer" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
