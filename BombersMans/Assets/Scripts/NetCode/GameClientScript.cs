@@ -131,6 +131,7 @@ namespace NetCode
                     {
                         string encodedMessage = Encoding.UTF8.GetString(buffer, 0, receivedBytes);
                         string[] messages = encodedMessage.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+                        Debug.Log(encodedMessage);
                         foreach (var message in messages)
                         {
                             var messageObject = JsonConvert.DeserializeObject<Dictionary<string, object>>(message);
@@ -187,7 +188,6 @@ namespace NetCode
                                     {
                                         MapBuilder.Instance.CreatePlayer(playerPackage);
                                     });
-                                    // код для спавна игрока на карте
                                     break;
                                 }
 
@@ -200,9 +200,6 @@ namespace NetCode
                                         {
                                             UIManager.Instance.loadingUI.SetText("Успешно подключились!");
                                         }
-
-                                        Debug.Log(
-                                            $"Статус подключения. {connectionStatusPackage.ConnectionDescription} - {connectionStatusPackage.ConnectionState}");
                                     });
                                         break;
                                 }
