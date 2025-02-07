@@ -230,6 +230,10 @@ namespace NetCode
                                     {
                                         var playerObj = JsonConvert.DeserializeObject<PlayerPackage>(player);
                                         Debug.Log($"{playerObj.Nickname} - {playerObj.Health}");
+                                        GameController.Instance.AddAction(() =>
+                                        {
+                                            GameController.Instance.AddPlayer(playerObj);
+                                        });
                                     }
                                     break;
                                 }
