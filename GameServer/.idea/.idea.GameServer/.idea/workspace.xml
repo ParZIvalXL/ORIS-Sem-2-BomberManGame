@@ -8,10 +8,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b8d803f-eda1-4368-a503-ddf856a2c5bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/PlayerConnectionPackage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/PlayerConnectionPackage.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GameServer/Packages/PlayerConnectionPackage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameServer/ClientObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ClientObject.cs" afterDir="false" />
     </list>
