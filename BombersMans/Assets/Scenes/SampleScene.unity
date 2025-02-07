@@ -12378,7 +12378,7 @@ MonoBehaviour:
   Bombs:
   - {fileID: 1516770052998690123, guid: 90351259bb8929e43b4442ddb33f4beb, type: 3}
   grid: {fileID: 657549612}
-  playerPrefab: {fileID: 4279549319274488024, guid: e5e2bbb3f567c974885bd4a516ef3be3, type: 3}
+  playerPrefab: {fileID: 5543408741733975480, guid: 9b363e03235f02f489f41ac0e9d082d9, type: 3}
   Players: []
 --- !u!114 &1527305507
 MonoBehaviour:
