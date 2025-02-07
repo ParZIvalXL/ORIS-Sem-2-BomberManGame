@@ -200,6 +200,12 @@ namespace NetCode
                                         {
                                             UIManager.Instance.loadingUI.SetText("Успешно подключились!");
                                         }
+                                        else if (connectionStatusPackage.ConnectionState == 400 || 
+                                                 connectionStatusPackage.ConnectionState == 404)
+                                        {
+                                            UIConnectScript.Instance.ShowErrorText(connectionStatusPackage
+                                                .ConnectionDescription);
+                                        }
                                     });
                                         break;
                                 }
