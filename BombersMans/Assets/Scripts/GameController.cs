@@ -55,8 +55,8 @@ public class GameController : MonoBehaviour
         if(!player) 
             return;
         Debug.Log("Update player " + playerPackage.Nickname + " at " + playerPackage.PositionX + ", " + playerPackage.PositionY + "Found player: " + player.PlayerNickname);
-        player.transform.position = new Vector3(playerPackage.PositionX, playerPackage.PositionY);
-        player._rb.position = new Vector3(playerPackage.PositionX, playerPackage.PositionY);
+        player.transform.position = Vector3.Lerp(player.transform.position, new Vector3(playerPackage.PositionX, playerPackage.PositionY, 0), 0.5f);
+        player._rb.position = Vector3.Lerp(player.transform.position, new Vector3(playerPackage.PositionX, playerPackage.PositionY, 0), 0.5f);
         player.SetDirection(new Vector2(playerPackage.DirectionX, playerPackage.DirectionY));
         player.health = playerPackage.Health;
     }

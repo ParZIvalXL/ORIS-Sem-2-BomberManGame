@@ -31,8 +31,9 @@ public class PlayerController : MonoBehaviour
     public float health { get => _health; 
         set 
         {
-        _health = value;
-        UIManager.Instance.UpdateHealthBar();
+            _health = value;
+            if (value <= 0) OnDeathSequenceEnded();
+            UIManager.Instance.UpdateHealthBar();
         } 
     }
     public Rigidbody2D _rb;
@@ -128,7 +129,7 @@ public class PlayerController : MonoBehaviour
     public async Task StartTimeOut()
     {
         timeOut = true;
-        await Task.Delay(500);
+        await Task.Delay(250);
         timeOut = false;
     }
 }

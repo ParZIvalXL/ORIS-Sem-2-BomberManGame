@@ -185,7 +185,7 @@ class ClientHandler
     public async Task StartTimeOut()
     {
         timeOut = true;
-        await Task.Delay(500);
+        await Task.Delay(250);
         timeOut = false;
     }
 
