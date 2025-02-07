@@ -60,7 +60,6 @@ class Server
     public void BroadcastPackage(object? obj, ClientHandler sender)
     {
         var message = JsonConvert.SerializeObject(obj);
-        Console.WriteLine(message);
         if (typeof(CurrentSession) == obj.GetType() && sender == clients[clients.Count - 1])
         {
             sender.SendMessage(message);

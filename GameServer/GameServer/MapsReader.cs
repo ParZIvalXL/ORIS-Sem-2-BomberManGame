@@ -40,4 +40,26 @@ public class MapsReader
         }
         return null;
     }
+    
+    public static void PrintMap(TileType[,]? map)
+    {
+        if (map == null)
+        {
+            Console.WriteLine("Карта пуста или не загружена.");
+            return;
+        }
+
+        int rows = map.GetLength(0);
+        int cols = map.GetLength(1);
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                Console.Write($"{map[i, j]} ");
+            }
+            Console.WriteLine();
+        }
+    }
+
 }
