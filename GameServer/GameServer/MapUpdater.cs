@@ -5,11 +5,19 @@ namespace GameServer.Packages;
 public static class MapUpdater
 {
     private static Random random = new Random();
-    public static void SetBomb(TileType[,]? grid, BombPackage? bomb)
+    public static async Task SetBomb(TileType[,]? grid, BombPackage? bomb)
     {
         if (grid[bomb.PositionX, bomb.PositionY] == Bomb) return;
         grid[bomb.PositionX, bomb.PositionY] = Bomb;
+        
+        await Task.Delay(3000);
+        Console.WriteLine("Бомба взорвалась!");
+
+        var bombScript = new BombScripts();
+        bombScript.ExplodeBomb(grid, bomb.PositionX, bomb.PositionY);
+        grid[bomb.PositionX, bomb.PositionY] = E;
     }
+    
     
     public static (int, int) SpawnPlayer(TileType[,]? grid)
     {

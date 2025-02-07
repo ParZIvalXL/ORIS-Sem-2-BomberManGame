@@ -15,13 +15,25 @@ class ClientHandler
     public string clientName = "Unknown";
     private bool connected;
     private StringBuilder receivedData = new StringBuilder();
-    private List<string> _playersListPackage = new List<string>();
+    public static List<string> _playersListPackage = new List<string>();
 
     public ClientHandler(Socket socket, Server server)
     {
         clientSocket = socket;
         this.server = server;
         connected = true;
+    }
+
+    public static List<PlayerPackage> GetPlayersList()
+    {
+        var result = new List<PlayerPackage>();
+        foreach (var playerSer in _playersListPackage)
+        {
+            var player = JsonConvert.DeserializeObject<PlayerPackage>(playerSer);
+            result.Add(player);
+        }
+
+        return result;
     }
 
     public void HandleClient()
@@ -75,7 +87,7 @@ class ClientHandler
             {
                 try
                 {
-                    var buffer = new byte[1024];
+                    var buffer = new byte[4096];
                     int receivedBytes = clientSocket.Receive(buffer);
                     if (receivedBytes == 0) break;
 
@@ -102,13 +114,19 @@ class ClientHandler
                                     PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(json);
                                     if (_playersListPackage.Count != 0)
                                     {
-                                        foreach (var player in _playersListPackage)
+                                        // Найти и обновить позицию игрока в списке
+                                        for (int i = 0; i < _playersListPackage.Count; i++)
                                         {
-                                            var a = JsonConvert.DeserializeObject<PlayerPackage>(player);
-                                            if (a.Nickname == package.Nickname)
+                                            var player = JsonConvert.DeserializeObject<PlayerPackage>(_playersListPackage[i]);
+                                            if (player.Nickname == package.Nickname)
                                             {
-                                                a.PositionX = package.PositionX;
-                                                a.PositionY = package.PositionY;
+                                                // Обновляем позиции игрока
+                                                player.PositionX = package.PositionX;
+                                                player.PositionY = package.PositionY;
+
+                                                // Сериализуем обратно и обновляем список
+                                                _playersListPackage[i] = JsonConvert.SerializeObject(player);
+                                                break;
                                             }
                                         }
                                     }
@@ -129,7 +147,7 @@ class ClientHandler
                                         $"Игрок {package.playerNickname} поставил бомбу {package.BombType} " +
                                         $"по координатам X:{package.PositionX}, Y:{package.PositionY}");
                                     MapUpdater.SetBomb(server._map, package);
-                                    MapsReader.PrintMap(server._map);
+                                    server.BroadcastPackage(curentSession, this);
                                     server.BroadcastPackage(package, this);
                                     break;
                                 }
