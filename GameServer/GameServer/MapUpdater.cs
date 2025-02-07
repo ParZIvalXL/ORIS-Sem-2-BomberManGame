@@ -22,17 +22,19 @@ public static class MapUpdater
     public static (int, int) SpawnPlayer(TileType[,]? grid)
     {
         List<(int, int)> validPositions = new List<(int, int)>();
+        
 
         int rows = grid.GetLength(0);
         int cols = grid.GetLength(1);
         
-        for (int x = 0; x < rows; x++)
+        for (int x = 0; x < rows - 1; x++)
         {
-            for (int y = 0; y < cols; y++)
+            for (int y = 0; y < cols - 1; y++)
             {
                 if (grid[x, y] == E && IsSafe(x, y, grid))
                 {
                     validPositions.Add((x, y));
+                    Console.WriteLine(x + " " + y );
                 }
             }
         }
