@@ -45,10 +45,28 @@ class ClientHandler
             int recB = clientSocket.Receive(buff);
             clientName = Encoding.UTF8.GetString(buff, 0, recB).Trim();
             Console.WriteLine($"{clientName} подключился к игре.");
-            _playersListPackage.Add(JsonConvert.SerializeObject(new PlayerPackage
+            bool playerExists = _playersListPackage.Any(p => 
             {
-                Nickname = clientName,
-            }));
+                var existingPlayer = JsonConvert.DeserializeObject<PlayerPackage>(p);
+                return existingPlayer != null && existingPlayer.Nickname == clientName;
+            });
+
+            if (!playerExists)
+            {
+                _playersListPackage.Add(JsonConvert.SerializeObject(new PlayerPackage
+                {
+                    Nickname = clientName,
+                }));
+            }
+            else
+            {
+                var answer = new ConnectionStatusPackage
+                {
+                    ConnectionState = 404,
+                    ConnectionDescription = "Такой игрок уже есть"
+                };
+                server.BroadcastPackage(answer, this);
+            }
 
             var playerConnected = new PlayerConnectionPackage
             {
@@ -205,7 +223,8 @@ class ClientHandler
             clientSocket.Send(data);
         }
         catch 
-        { Disconnect();
+        {
+            Disconnect();
         }
     }
 
