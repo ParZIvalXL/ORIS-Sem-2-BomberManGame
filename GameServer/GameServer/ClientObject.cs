@@ -76,11 +76,6 @@ class ClientHandler
                 ConnectionState = (int)ConnectionState.Successful,
                 ConnectionDescription = ConnectionState.Successful.ToString()
             };
-            var playerListPackage = new PlayerListPackage
-            {
-                Type = "PlayersList",
-                List = _playersListPackage
-            };
             server.BroadcastPackage(connectionStatusPackage, this);
             
             while (true)
@@ -111,21 +106,27 @@ class ClientHandler
                             {
                                 case "PlayerPackage":
                                 {
+                                    PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(json);
                                     for (int i = 0; i < _playersListPackage.Count; i++)
                                     {
-                                        PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(json);
-                                        PlayerPackage? player = JsonConvert.DeserializeObject<PlayerPackage>(_playersListPackage[i]);
-                                        if (player.Nickname == package.Nickname)
+                                        var playerObj = JsonConvert.DeserializeObject<PlayerPackage>(_playersListPackage[i]);
+                                        if (playerObj != null && playerObj.Nickname == package.Nickname)
                                         {
-                                            player.PositionX = package.PositionX;
-                                            player.PositionY = package.PositionY;
-                                            _playersListPackage[i] = JsonConvert.SerializeObject(player);
+                                            playerObj.PositionX = package.PositionX;
+                                            playerObj.PositionY = package.PositionY;
+                                            
+                                            _playersListPackage[i] = JsonConvert.SerializeObject(playerObj);
                                             break;
                                         }
                                     }
 
                                     if (!timeOut)
                                     {
+                                        var playerListPackage = new PlayerListPackage
+                                        {
+                                            Type = "PlayersList",
+                                            List = _playersListPackage
+                                        };
                                         server.BroadcastPackage(playerListPackage, this);
                                         StartTimeOut();
                                     }

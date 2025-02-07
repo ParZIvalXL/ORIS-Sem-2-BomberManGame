@@ -75,23 +75,9 @@ public class BombScripts
             right += 1;
         }
 
-        Console.WriteLine("top" + top + "bottom" + bottom + "left" + left + "right" + right);
         var players = ClientHandler.GetPlayersList();
-        
-        var sortedPlayers = players
-            .Where(player =>
-            {
-                var (playerX, playerY) = PlayerHandler.GetPlayerCoordinates(player);
-                return playerX == bombX || playerY == bombY;
-            })
-            .OrderBy(player =>
-            {
-                var (playerX, playerY) = PlayerHandler.GetPlayerCoordinates(player);
-                return (playerX == bombX ? 0 : 1) + (playerY == bombY ? 0 : 1);
-            })
-            .ToList();
 
-        foreach (var player in sortedPlayers)
+        foreach (var player in players)
         {
             var coordinates = PlayerHandler.GetPlayerCoordinates(player);
             if ((left <= coordinates.Item1 && coordinates.Item1 <= right && coordinates.Item2 == bombY) || (bottom <= coordinates.Item2 && coordinates.Item2 <= top && coordinates.Item1 == bombX))
