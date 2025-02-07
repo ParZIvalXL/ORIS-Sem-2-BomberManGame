@@ -34,11 +34,16 @@ class Server
             while (true)
             {
                 var clientSocket = listenerSocket.Accept();
+                var clientHandler = new ClientHandler(clientSocket, this);
                 if (clients.Count >= 4)
                 {
-                    
+                    var answer = new ConnectionStatusPackage
+                    {
+                        ConnectionState = 400,
+                        ConnectionDescription = "FullLobby"
+                    };
+                    BroadcastPackage(answer, clientHandler);
                 }
-                var clientHandler = new ClientHandler(clientSocket, this);
                 clients.Add(clientHandler);
                 Task.Run(() => clientHandler.HandleClient());
             }

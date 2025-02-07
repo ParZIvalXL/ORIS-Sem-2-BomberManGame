@@ -111,26 +111,23 @@ class ClientHandler
                             {
                                 case "PlayerPackage":
                                 {
-                                    PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(json);
-                                    if (_playersListPackage.Count != 0)
+                                    for (int i = 0; i < _playersListPackage.Count; i++)
                                     {
-                                        for (int i = 0; i < _playersListPackage.Count; i++)
+                                        PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(json);
+                                        PlayerPackage? player = JsonConvert.DeserializeObject<PlayerPackage>(_playersListPackage[i]);
+                                        if (player.Nickname == package.Nickname)
                                         {
-                                            var player = JsonConvert.DeserializeObject<PlayerPackage>(_playersListPackage[i]);
-                                            if (player.Nickname == package.Nickname)
-                                            {
-                                                player.PositionX = package.PositionX;
-                                                player.PositionY = package.PositionY;
-                                                _playersListPackage[i] = JsonConvert.SerializeObject(player);
-                                                break;
-                                            }
+                                            player.PositionX = package.PositionX;
+                                            player.PositionY = package.PositionY;
+                                            _playersListPackage[i] = JsonConvert.SerializeObject(player);
+                                            break;
                                         }
+                                    }
 
-                                        if (!timeOut)
-                                        {
-                                            server.BroadcastPackage(playerListPackage, this);
-                                            StartTimeOut();
-                                        }
+                                    if (!timeOut)
+                                    {
+                                        server.BroadcastPackage(playerListPackage, this);
+                                        StartTimeOut();
                                     }
                                     Console.WriteLine(json);
                                     break;
