@@ -8,7 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b8d803f-eda1-4368-a503-ddf856a2c5bb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameServer/ServerObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ServerObject.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
