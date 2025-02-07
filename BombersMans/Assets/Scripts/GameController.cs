@@ -26,6 +26,13 @@ public class GameController : MonoBehaviour
     {
         return Bombs.Find(bomb => Mathf.Approximately(bomb.transform.position.x, x) && Mathf.Approximately(bomb.transform.position.y, y));
     }
+
+    public void DeletePlayerFromScene(string playerName)
+    {
+        var player = GetPlayer(playerName);
+        if (player == null) return;
+        player.gameObject.SetActive(false);
+    }
     
     [CanBeNull]
     public PlayerController GetPlayer(float x, float y)

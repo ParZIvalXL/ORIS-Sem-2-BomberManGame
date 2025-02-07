@@ -248,6 +248,13 @@ namespace NetCode
                                 case "PlayerConnectionPackage":
                                 {
                                     var package = JsonConvert.DeserializeObject<PlayerConnectionPackage>(message);
+                                    GameController.Instance.AddAction(() =>
+                                    {
+                                        if(package.CodeConnection == 0)
+                                        {
+                                            GameController.Instance.DeletePlayerFromScene(package.PlayerName);
+                                        }
+                                    });
                                     break;
                                 }
                                 default:
