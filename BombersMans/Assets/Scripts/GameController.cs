@@ -21,21 +21,26 @@ public class GameController : MonoBehaviour
         Bombs.Add(bomb);
     }
 
-    public BombScript? GetBomb(float x, float y)
+    [CanBeNull]
+    public BombScript GetBomb(float x, float y)
     {
         return Bombs.Find(bomb => Mathf.Approximately(bomb.transform.position.x, x) && Mathf.Approximately(bomb.transform.position.y, y));
     }
     
-    public PlayerController? GetPlayer(float x, float y)
+    [CanBeNull]
+    public PlayerController GetPlayer(float x, float y)
     {
         return Players.Find(player => Mathf.Approximately(player.transform.position.x, x) && Mathf.Approximately(player.transform.position.y, y));
     }
     
-    [CanBeNull] public PlayerController? GetPlayer(string playerName) => Players.Find(player => player.PlayerNickname == playerName);
+    [CanBeNull] 
+    public PlayerController GetPlayer(string playerName) => Players.Find(player => player.PlayerNickname.Equals(playerName));
 
     public void AddPlayer(PlayerPackage playerPackage)
     {
         if(playerPackage.Nickname == GameClientScript.Instance.playerName) return;
+
+        Debug.Log("Spawn player " + playerPackage.Nickname + " at " + playerPackage.PositionX + ", " + playerPackage.PositionY );
         var player = Instantiate(playerPrefab, new Vector3(playerPackage.PositionX, playerPackage.PositionY),
             Quaternion.identity);
         var playerController = player.GetComponent<PlayerController>();
@@ -44,6 +49,18 @@ public class GameController : MonoBehaviour
         Players.Add(playerController);
     }
 
+    public void UpdatePlayer(PlayerPackage playerPackage)
+    {
+        var player = GetPlayer(playerPackage.Nickname);
+        if(!player) 
+            return;
+        Debug.Log("Update player " + playerPackage.Nickname + " at " + playerPackage.PositionX + ", " + playerPackage.PositionY + "Found player: " + player.PlayerNickname);
+        player.transform.position = new Vector3(playerPackage.PositionX, playerPackage.PositionY);
+        player._rb.position = new Vector3(playerPackage.PositionX, playerPackage.PositionY);
+        player.SetDirection(new Vector2(playerPackage.DirectionX, playerPackage.DirectionY));
+        player.health = playerPackage.Health;
+    }
+    
     public void AddAction(Action action)
     {
         actions.Enqueue(action);

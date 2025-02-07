@@ -41,7 +41,8 @@ namespace UI
         {
             animator.SetBool(Fade, hasToFade);
             animator.SetBool(Show1, false);
-            StartCoroutine(Hide());
+            if(isActiveAndEnabled)
+                StartCoroutine(Hide());
             isEnabled = false;
         }
         

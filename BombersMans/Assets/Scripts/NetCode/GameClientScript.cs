@@ -226,10 +226,14 @@ namespace NetCode
                                     foreach (var player in package.List)
                                     {
                                         var playerObj = JsonConvert.DeserializeObject<PlayerPackage>(player);
-                                        Debug.Log($"{playerObj.Nickname} - {playerObj.Health}");
+                                        Debug.Log("player: " + player);
+                                        Debug.Log(playerObj.Nickname + " " + playerObj.PositionX + " " + playerObj.PositionY);
                                         GameController.Instance.AddAction(() =>
                                         {
-                                            GameController.Instance.AddPlayer(playerObj);
+                                            if(GameController.Instance.GetPlayer(playerObj.Nickname) == null)
+                                                GameController.Instance.AddPlayer(playerObj);
+                                            else
+                                                GameController.Instance.UpdatePlayer(playerObj);
                                         });
                                     }
                                     break;
