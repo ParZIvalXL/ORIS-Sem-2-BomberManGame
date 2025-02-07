@@ -107,9 +107,8 @@ class ClientHandler
                                             var a = JsonConvert.DeserializeObject<PlayerPackage>(player);
                                             if (a.Nickname == package.Nickname)
                                             {
-                                                a.DirectionX = package.DirectionX;
-                                                a.DirectionY = package.DirectionY;
-                                                a.Health = package.Health;
+                                                a.PositionX = package.PositionX;
+                                                a.PositionY = package.PositionY;
                                             }
                                         }
                                     }
@@ -130,6 +129,7 @@ class ClientHandler
                                         $"Игрок {package.playerNickname} поставил бомбу {package.BombType} " +
                                         $"по координатам X:{package.PositionX}, Y:{package.PositionY}");
                                     MapUpdater.SetBomb(server._map, package);
+                                    MapsReader.PrintMap(server._map);
                                     server.BroadcastPackage(package, this);
                                     break;
                                 }

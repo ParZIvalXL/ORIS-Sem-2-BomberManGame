@@ -122,7 +122,7 @@ namespace NetCode
         {
             try
             {
-                byte[] buffer = new byte[2048];
+                byte[] buffer = new byte[4096];
                 
                 while (true)
                 {
@@ -229,6 +229,7 @@ namespace NetCode
                                     foreach (var player in package.List)
                                     {
                                         var playerObj = JsonConvert.DeserializeObject<PlayerPackage>(player);
+                                        Debug.Log($"{playerObj.Nickname} - {playerObj.Health}");
                                     }
                                     break;
                                 }
