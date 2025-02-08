@@ -34,7 +34,6 @@ public static class MapUpdater
                 if (grid[x, y] == E && IsSafe(x, y, grid))
                 {
                     validPositions.Add((x, y));
-                    Console.WriteLine(x + " " + y );
                 }
             }
         }

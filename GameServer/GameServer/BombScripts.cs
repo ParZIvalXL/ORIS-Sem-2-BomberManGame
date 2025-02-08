@@ -76,7 +76,20 @@ public class BombScripts
         }
 
         var players = ClientHandler.GetPlayersList();
+        
+        players.Sort((player1, player2) =>
+        {
+            var (x1, y1) = PlayerHandler.GetPlayerCoordinates(player1);
+            var (x2, y2) = PlayerHandler.GetPlayerCoordinates(player2);
 
+            bool isNearBomb1 = x1 == bombX || y1 == bombY;
+            bool isNearBomb2 = x2 == bombX || y2 == bombY;
+
+            if (isNearBomb1 && !isNearBomb2) return -1;
+            if (!isNearBomb1 && isNearBomb2) return 1;
+            return 0;
+        });
+        
         foreach (var player in players)
         {
             var coordinates = PlayerHandler.GetPlayerCoordinates(player);

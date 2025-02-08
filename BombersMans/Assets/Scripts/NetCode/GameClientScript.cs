@@ -236,7 +236,7 @@ namespace NetCode
                                     {
                                         var playerObj = JsonConvert.DeserializeObject<PlayerPackage>(player);
                                         Debug.Log("player: " + player);
-                                        Debug.Log(playerObj.Nickname + " " + playerObj.PositionX + " " + playerObj.PositionY);
+                                        Debug.Log(playerObj.Nickname + " " + playerObj.PositionX + " " + playerObj.PositionY + " " + playerObj.Health);
                                         GameController.Instance.AddAction(() =>
                                         {
                                             if(GameController.Instance.GetPlayer(playerObj.Nickname) == null)

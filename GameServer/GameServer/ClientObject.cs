@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http.Json;
 using System.Net.Sockets;
 using System.Text;
@@ -37,6 +38,7 @@ class ClientHandler
         return result;
     }
 
+    [SuppressMessage("ReSharper.DPA", "DPA0002: Excessive memory allocations in SOH", MessageId = "type: System.Byte[]; size: 1903MB")]
     public void HandleClient()
     {
         try
@@ -45,7 +47,7 @@ class ClientHandler
             int recB = clientSocket.Receive(buff);
             clientName = Encoding.UTF8.GetString(buff, 0, recB).Trim();
             Console.WriteLine($"{clientName} подключился к игре.");
-            bool playerExists = _playersListPackage.Any(p => 
+            bool playerExists = _playersListPackage.Any(p =>
             {
                 var existingPlayer = JsonConvert.DeserializeObject<PlayerPackage>(p);
                 return existingPlayer != null && existingPlayer.Nickname == clientName;
@@ -96,7 +98,7 @@ class ClientHandler
             server.BroadcastPackage(newClient, this);
             server.BroadcastPackage(spawnPlayerPackage, this);
             server.BroadcastPackage(curentSession, this);
-            
+
             var connectionStatusPackage = new ConnectionStatusPackage
             {
                 ConnectionState = (int)ConnectionState.Successful,
@@ -104,18 +106,21 @@ class ClientHandler
             };
             server.BroadcastPackage(connectionStatusPackage, this);
             server.BroadcastPackage(playerConnected, this);
-            
+
             while (true)
             {
                 try
                 {
-                    var buffer = new byte[4096];
+                    var buffer = new byte[2048];
                     int receivedBytes = clientSocket.Receive(buffer);
-                    if (receivedBytes == 0) break;
-
+                    if (receivedBytes == 0)
+                    {
+                        Console.WriteLine($"Клиент {clientName} отключился");
+                        Disconnect();
+                        break;
+                    }
                     string mess = Encoding.UTF8.GetString(buffer, 0, receivedBytes);
                     receivedData.Append(mess);
-
                     while (receivedData.ToString().Contains("\n"))
                     {
                         string[] messages = receivedData.ToString().Split(new[] { '\n' }, 2);
@@ -123,90 +128,71 @@ class ClientHandler
                         receivedData.Clear();
                         if (messages.Length > 1)
                             receivedData.Append(messages[1]);
-
-                        try
+                        var messageObject = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                        string typeObj = messageObject["Type"];
+                        switch (typeObj)
                         {
-                            var messageObject = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-                            string typeObj = messageObject["Type"];
-
-                            switch (typeObj)
+                            case "PlayerPackage":
                             {
-                                case "PlayerPackage":
+                                PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(json);
+                                for (int i = 0; i < _playersListPackage.Count; i++)
                                 {
-                                    PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(json);
-                                    for (int i = 0; i < _playersListPackage.Count; i++)
+                                    var playerObj =
+                                        JsonConvert.DeserializeObject<PlayerPackage>(_playersListPackage[i]);
+                                    if (playerObj != null && playerObj.Nickname == package.Nickname)
                                     {
-                                        var playerObj = JsonConvert.DeserializeObject<PlayerPackage>(_playersListPackage[i]);
-                                        if (playerObj != null && playerObj.Nickname == package.Nickname)
-                                        {
-                                            playerObj.PositionX = package.PositionX;
-                                            playerObj.PositionY = package.PositionY;
-                                            
-                                            _playersListPackage[i] = JsonConvert.SerializeObject(playerObj);
-                                            break;
-                                        }
-                                    }
+                                        playerObj.PositionX = package.PositionX;
+                                        playerObj.PositionY = package.PositionY;
 
-                                    string x = "\nplayers: \n";
-                                    foreach (var a in _playersListPackage)
-                                    {
-                                        x += a + "\n";
+                                        _playersListPackage[i] = JsonConvert.SerializeObject(playerObj);
+                                        break;
                                     }
-                                    
-                                    Console.WriteLine(x);
-                                    
-                                    if (!timeOut)
+                                }
+
+                                if (!timeOut)
+                                {
+                                    var playerListPackage = new PlayerListPackage
                                     {
-                                        var playerListPackage = new PlayerListPackage
-                                        {
-                                            Type = "PlayersList",
-                                            List = _playersListPackage
-                                        };
-                                        server.BroadcastPackage(playerListPackage, this);
-                                        StartTimeOut();
-                                    }
-                                    Console.WriteLine(json);
-                                    break;
+                                        Type = "PlayersList",
+                                        List = _playersListPackage
+                                    };
+                                    server.BroadcastPackage(playerListPackage, this);
+                                    StartTimeOut();
                                 }
-                                case "MessagePackage":
-                                {
-                                    MessagePackage? package = JsonConvert.DeserializeObject<MessagePackage>(json);
-                                    Console.WriteLine($"{package.Sender}: {package.Content}");
-                                    server.BroadcastPackage(package, this);
-                                    break;
-                                }
-                                case "BombPackage":
-                                {
-                                    BombPackage? package = JsonConvert.DeserializeObject<BombPackage>(json);
-                                    Console.WriteLine(
-                                        $"Игрок {package.playerNickname} поставил бомбу {package.BombType} " +
-                                        $"по координатам X:{package.PositionX}, Y:{package.PositionY}");
-                                    MapUpdater.SetBomb(server._map, package);
-                                    server.BroadcastPackage(curentSession, this);
-                                    server.BroadcastPackage(package, this);
-                                    break;
-                                }
+
+                                break;
                             }
-                        }
-                        catch (JsonException e)
-                        {
-                            Console.WriteLine($"Ошибка десериализации: {e.Message}");
+                            case "MessagePackage":
+                            {
+                                MessagePackage? package = JsonConvert.DeserializeObject<MessagePackage>(json);
+                                Console.WriteLine($"{package.Sender}: {package.Content}");
+                                server.BroadcastPackage(package, this);
+                                break;
+                            }
+                            case "BombPackage":
+                            {
+                                BombPackage? package = JsonConvert.DeserializeObject<BombPackage>(json);
+                                Console.WriteLine(
+                                    $"Игрок {package.playerNickname} поставил бомбу {package.BombType} " +
+                                    $"по координатам X:{package.PositionX}, Y:{package.PositionY}");
+                                MapUpdater.SetBomb(server._map, package);
+                                server.BroadcastPackage(curentSession, this);
+                                server.BroadcastPackage(package, this);
+                                break;
+                            }
                         }
                     }
                 }
-                catch (SocketException)
-                {
-                    Console.WriteLine($"{clientName} отключился.");
-                    server.BroadcastPackage($"Игрок {clientName} отключился от игры", this);
-                    break;
-                }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Ошибка: {e.Message}");
+                    Console.WriteLine($"Игрок {clientName} покинул игру");
                 }
             }
         }
-        finally{}
+        finally
+        {
+            server.RemoveClient(this);
+        }
     }
 
     public async Task StartTimeOut()
@@ -225,21 +211,37 @@ class ClientHandler
         }
         catch 
         {
-            Disconnect();
+            server.RemoveClient(this);
         }
     }
 
     public void Disconnect()
     {
-        var answer = new PlayerConnectionPackage
+        try
         {
-            PlayerName = clientName,
-            CodeConnection = 0,
-            Type = nameof(PlayerConnectionPackage)
-        };
-        server.BroadcastPackage(answer, this);
-        connected = false;
-        clientSocket.Close();
-        server.RemoveClient(this);
+            var answer = new PlayerConnectionPackage
+            {
+                PlayerName = clientName,
+                CodeConnection = 0,
+                Type = nameof(PlayerConnectionPackage)
+            };
+
+            server.BroadcastPackage(answer, this);
+            connected = false;
+
+            if (clientSocket.Connected)
+            {
+                clientSocket.Shutdown(SocketShutdown.Both);
+                clientSocket.Close();
+            }
+
+            server.RemoveClient(this);
+            Console.WriteLine($"Клиент {clientName} успешно отключен");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка при отключении {clientName}: {ex.Message}");
+        }
     }
+
 }
