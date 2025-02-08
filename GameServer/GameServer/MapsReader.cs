@@ -61,5 +61,24 @@ public class MapsReader
             Console.WriteLine();
         }
     }
-
+    
+    public static TileType[,]? MirrorMapX(TileType[,]? map)
+    {
+        if (map == null)
+            return null;
+        
+        int rows = map.GetLength(0);
+        int cols = map.GetLength(1);
+        TileType[,] mirroredMap = new TileType[rows, cols];
+        
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                mirroredMap[i, j] = map[rows - 1 - i, j];
+            }
+        }
+        
+        return mirroredMap;
+    }
 }

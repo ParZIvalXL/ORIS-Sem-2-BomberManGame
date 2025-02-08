@@ -31,7 +31,7 @@ class Server
             listenerSocket.Bind(new IPEndPoint(IPAddress.Any, port));
             listenerSocket.Listen(10);
             Console.WriteLine($"Сервер запущен на {IPAddress.Any}:{port}. Ожидание подключений...");
-            _map = MapsReader.GetMap(File.ReadAllText("Maps.json"));
+            _map = MapsReader.MirrorMapX(MapsReader.GetMap(File.ReadAllText("Maps.json")));
             while (true)
             {
                 var clientSocket = listenerSocket.Accept();
