@@ -12,33 +12,19 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 class ClientHandler
 {
     private readonly Socket clientSocket;
-    private readonly Server server;
+    public static Server server;
     public string clientName = "Unknown";
     private bool connected;
     private StringBuilder receivedData = new StringBuilder();
-    public static List<string> _playersListPackage = new List<string>();
     public bool timeOut = false;
 
     public ClientHandler(Socket socket, Server server)
     {
         clientSocket = socket;
-        this.server = server;
+        ClientHandler.server = server;
         connected = true;
     }
-
-    public static List<PlayerPackage> GetPlayersList()
-    {
-        var result = new List<PlayerPackage>();
-        foreach (var playerSer in _playersListPackage)
-        {
-            var player = JsonConvert.DeserializeObject<PlayerPackage>(playerSer);
-            result.Add(player);
-        }
-
-        return result;
-    }
-
-    [SuppressMessage("ReSharper.DPA", "DPA0002: Excessive memory allocations in SOH", MessageId = "type: System.Byte[]; size: 1903MB")]
+    
     public void HandleClient()
     {
         try
@@ -47,18 +33,17 @@ class ClientHandler
             int recB = clientSocket.Receive(buff);
             clientName = Encoding.UTF8.GetString(buff, 0, recB).Trim();
             Console.WriteLine($"{clientName} подключился к игре.");
-            bool playerExists = _playersListPackage.Any(p =>
+            bool playerExists = server._playersListPackage.Any(p =>
             {
-                var existingPlayer = JsonConvert.DeserializeObject<PlayerPackage>(p);
-                return existingPlayer != null && existingPlayer.Nickname == clientName;
+                return p != null && p.Nickname == clientName;
             });
 
             if (!playerExists)
             {
-                _playersListPackage.Add(JsonConvert.SerializeObject(new PlayerPackage
+                server._playersListPackage.Add(new PlayerPackage
                 {
                     Nickname = clientName,
-                }));
+                });
             }
             else
             {
@@ -68,7 +53,6 @@ class ClientHandler
                     ConnectionDescription = "Такой игрок уже есть"
                 };
                 server.BroadcastPackage(answer, this);
-                Disconnect();
             }
 
             var playerConnected = new PlayerConnectionPackage
@@ -115,10 +99,10 @@ class ClientHandler
                     int receivedBytes = clientSocket.Receive(buffer);
                     if (receivedBytes == 0)
                     {
-                        Console.WriteLine($"Клиент {clientName} отключился");
-                        Disconnect();
+                        Disconnect(this);
                         break;
                     }
+
                     string mess = Encoding.UTF8.GetString(buffer, 0, receivedBytes);
                     receivedData.Append(mess);
                     while (receivedData.ToString().Contains("\n"))
@@ -135,16 +119,13 @@ class ClientHandler
                             case "PlayerPackage":
                             {
                                 PlayerPackage? package = JsonConvert.DeserializeObject<PlayerPackage>(json);
-                                for (int i = 0; i < _playersListPackage.Count; i++)
+                                for (int i = 0; i < server._playersListPackage.Count; i++)
                                 {
-                                    var playerObj =
-                                        JsonConvert.DeserializeObject<PlayerPackage>(_playersListPackage[i]);
-                                    if (playerObj != null && playerObj.Nickname == package.Nickname)
+                                    if (server._playersListPackage[i] != null && server._playersListPackage[i].Nickname == package.Nickname)
                                     {
-                                        playerObj.PositionX = package.PositionX;
-                                        playerObj.PositionY = package.PositionY;
+                                        server._playersListPackage[i].PositionX = package.PositionX;
+                                        server._playersListPackage[i].PositionY = package.PositionY;
 
-                                        _playersListPackage[i] = JsonConvert.SerializeObject(playerObj);
                                         break;
                                     }
                                 }
@@ -154,7 +135,7 @@ class ClientHandler
                                     var playerListPackage = new PlayerListPackage
                                     {
                                         Type = "PlayersList",
-                                        List = _playersListPackage
+                                        List = server._playersListPackage
                                     };
                                     server.BroadcastPackage(playerListPackage, this);
                                     StartTimeOut();
@@ -185,7 +166,6 @@ class ClientHandler
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Игрок {clientName} покинул игру");
                 }
             }
         }
@@ -215,7 +195,7 @@ class ClientHandler
         }
     }
 
-    public void Disconnect()
+    public void Disconnect(ClientHandler client)
     {
         try
         {
@@ -228,7 +208,13 @@ class ClientHandler
 
             server.BroadcastPackage(answer, this);
             connected = false;
-
+            foreach (var player in server._playersListPackage.ToList())
+            {
+                if (player.Nickname == clientName)
+                {
+                    server._playersListPackage.Remove(player);
+                }
+            }
             if (clientSocket.Connected)
             {
                 clientSocket.Shutdown(SocketShutdown.Both);
@@ -236,7 +222,7 @@ class ClientHandler
             }
 
             server.RemoveClient(this);
-            Console.WriteLine($"Клиент {clientName} успешно отключен");
+            Console.WriteLine($"Клиент {clientName} отключился");
         }
         catch (Exception ex)
         {

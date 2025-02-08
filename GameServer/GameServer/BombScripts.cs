@@ -5,7 +5,7 @@ namespace GameServer;
 
 public class BombScripts
 {
-    public void ExplodeBomb(TileType[,] map, int bombX, int bombY)
+    public void ExplodeBomb(TileType[,] map, int bombX, int bombY, string playerNickname)
     {
         var top = bombY;
         var bottom = bombY;
@@ -75,7 +75,7 @@ public class BombScripts
             right += 1;
         }
 
-        var players = ClientHandler.GetPlayersList();
+        var players = ClientHandler.server._playersListPackage;
         
         players.Sort((player1, player2) =>
         {
@@ -96,17 +96,20 @@ public class BombScripts
             if ((left <= coordinates.Item1 && coordinates.Item1 <= right && coordinates.Item2 == bombY) || (bottom <= coordinates.Item2 && coordinates.Item2 <= top && coordinates.Item1 == bombX))
             {
                 player.Health -= 25;
-                for (int i = 0; i < ClientHandler._playersListPackage.Count; i++)
+                if (player.Health == 0)
                 {
-                    var pl = JsonConvert.DeserializeObject<PlayerPackage>(ClientHandler._playersListPackage[i]);
-                    if (pl.Nickname == player.Nickname)
+                    
+                }
+                
+                for (int i = 0; i < ClientHandler.server._playersListPackage.Count; i++)
+                {
+                    
+                    if (ClientHandler.server._playersListPackage[i].Nickname == player.Nickname)
                     {
-                        pl.Health = player.Health;
-
-                        ClientHandler._playersListPackage[i] = JsonConvert.SerializeObject(pl);
+                        ClientHandler.server._playersListPackage[i].Health = player.Health;
                     }
                 }
-                Console.WriteLine($"Игрок {player.Nickname} попал под взрыв, его здоровье = {player.Health}");
+                Console.WriteLine($"Игрок {player.Nickname} попал под взрыв бомбы игрока {playerNickname}, его здоровье = {player.Health}");
             }
         }
     }

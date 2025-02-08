@@ -17,6 +17,7 @@ class Server
     private readonly int port;
     public TileType[,]? _map;
     private bool isRunning = true;
+    public List<PlayerPackage> _playersListPackage = new List<PlayerPackage>();
     public bool IsStarted { get; private set; } = false;
 
     public Server(int port)
@@ -59,7 +60,7 @@ class Server
                         };
                         BroadcastPackage(answer, clientHandler);
                         clients.Remove(clientHandler);
-                        clientHandler.Disconnect();
+                        clientHandler.Disconnect(clientHandler);
                     }
                 }
 
@@ -82,29 +83,37 @@ class Server
 
     public void BroadcastPackage(object? obj, ClientHandler sender)
     {
-        var message = JsonConvert.SerializeObject(obj);
-        if (typeof(CurrentSession) == obj.GetType() && sender == clients[clients.Count - 1])
+        try
         {
-            sender.SendMessage(message);
-            return;
-        }
-        
-        if (typeof(ConnectionStatusPackage) == obj.GetType())
-        {
-            sender.SendMessage(message);
-        }
+            var message = JsonConvert.SerializeObject(obj);
+            if (typeof(CurrentSession) == obj.GetType() && sender == clients[clients.Count - 1])
+            {
+                sender.SendMessage(message);
+                return;
+            }
+            Console.WriteLine(message);
+            if (typeof(ConnectionStatusPackage) == obj.GetType())
+            {
+                sender.SendMessage(message);
+            }
 
-        foreach (var client in clients.ToList())
+            foreach (var client in clients.ToList())
+            {
+                try
+                {
+                    client.SendMessage(message);
+                }
+                catch
+                {
+                    RemoveClient(client);
+                    client.Disconnect(client);
+                }
+            }
+        }
+        catch (Exception e)
         {
-            try
-            {
-                client.SendMessage(message);
-            }
-            catch
-            {
-                RemoveClient(client);
-                client.Disconnect();
-            }
+            Console.WriteLine(e + " хуесосы");
+            throw;
         }
     }
     
@@ -130,7 +139,7 @@ class Server
 
         foreach (var client in clients)
         {
-            client.Disconnect();
+            client.Disconnect(client);
         }
         clients.Clear();
     

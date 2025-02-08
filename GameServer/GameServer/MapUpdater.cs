@@ -14,7 +14,7 @@ public static class MapUpdater
         Console.WriteLine("Бомба взорвалась!");
 
         var bombScript = new BombScripts();
-        bombScript.ExplodeBomb(grid, bomb.PositionX, bomb.PositionY);
+        bombScript.ExplodeBomb(grid, bomb.PositionX, bomb.PositionY, bomb.playerNickname);
         grid[bomb.PositionX, bomb.PositionY] = E;
     }
     
