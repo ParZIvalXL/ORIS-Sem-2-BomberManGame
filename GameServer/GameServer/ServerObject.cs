@@ -18,6 +18,7 @@ class Server
     public TileType[,]? _map;
     private bool isRunning = true;
     public List<PlayerPackage> _playersListPackage = new List<PlayerPackage>();
+    public  List<PlayerPackage> _allPlayersList = new List<PlayerPackage>();
     public bool IsStarted { get; private set; } = false;
 
     public Server(int port)
@@ -48,8 +49,8 @@ class Server
                     {
                         ConnectionState = 100,
                         ConnectionDescription = "Игра началась"
-                    };
-                    BroadcastPackage(answerStartedGame, clientHandler);
+                    }; 
+                    BroadcastPackageAll(answerStartedGame);
 
                     if (clients.Count > 4)
                     {
@@ -58,7 +59,7 @@ class Server
                             ConnectionState = 400,
                             ConnectionDescription = "Полное лобби"
                         };
-                        BroadcastPackage(answer, clientHandler);
+                        BroadcastPackageSingle(answer, clientHandler);
                         clients.Remove(clientHandler);
                         clientHandler.Disconnect(clientHandler);
                     }
@@ -81,22 +82,18 @@ class Server
         }
     }
 
-    public void BroadcastPackage(object? obj, ClientHandler sender)
+    public void BroadcastPackageSingle(object? obj, ClientHandler clientHandler)
+    {
+        var message = JsonConvert.SerializeObject(obj);
+        clientHandler.SendMessage(message);
+    }
+
+    public void BroadcastPackageAll(object? obj)
     {
         try
         {
             var message = JsonConvert.SerializeObject(obj);
-            if (typeof(CurrentSession) == obj.GetType() && sender == clients[clients.Count - 1])
-            {
-                sender.SendMessage(message);
-                return;
-            }
             Console.WriteLine(message);
-            if (typeof(ConnectionStatusPackage) == obj.GetType())
-            {
-                sender.SendMessage(message);
-            }
-
             foreach (var client in clients.ToList())
             {
                 try
