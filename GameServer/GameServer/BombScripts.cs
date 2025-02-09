@@ -75,7 +75,9 @@ public class BombScripts
             right += 1;
         }
 
-        var players = ClientHandler.GetPlayersList();
+        var players = ClientHandler.GetPlayersList()
+            .Where(p => Math.Abs(p.PositionX - (float)bombX) < 0.01 || Math.Abs(p.PositionY - (float)bombY) < 0.01).ToList();
+        Console.WriteLine("Players in range: " + players.Count);
 
         foreach (var player in players)
         {
@@ -86,7 +88,7 @@ public class BombScripts
                 for (int i = 0; i < ClientHandler._playersListPackage.Count; i++)
                 {
                     var pl = JsonConvert.DeserializeObject<PlayerPackage>(ClientHandler._playersListPackage[i]);
-                    if (pl.Nickname == player.Nickname)
+                    if (pl.Nickname.Equals(player.Nickname))
                     {
                         pl.Health = player.Health;
 

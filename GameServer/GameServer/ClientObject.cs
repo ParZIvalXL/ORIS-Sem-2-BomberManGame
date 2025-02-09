@@ -153,7 +153,7 @@ class ClientHandler
                                         x += a + "\n";
                                     }
                                     
-                                    Console.WriteLine(x);
+                                    //Console.WriteLine(x);
                                     
                                     if (!timeOut)
                                     {
@@ -165,7 +165,7 @@ class ClientHandler
                                         server.BroadcastPackage(playerListPackage, this);
                                         StartTimeOut();
                                     }
-                                    Console.WriteLine(json);
+                                    //Console.WriteLine(json);
                                     break;
                                 }
                                 case "MessagePackage":

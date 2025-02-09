@@ -66,6 +66,7 @@ public class GameController : MonoBehaviour
         player._rb.position = Vector3.Lerp(player.transform.position, new Vector3(playerPackage.PositionX, playerPackage.PositionY, 0), 0.5f);
         player.SetDirection(new Vector2(playerPackage.DirectionX, playerPackage.DirectionY));
         player.health = playerPackage.Health;
+        Debug.Log("player health " + player.health + " Server pl health " + playerPackage.Health);
     }
     
     public void AddAction(Action action)

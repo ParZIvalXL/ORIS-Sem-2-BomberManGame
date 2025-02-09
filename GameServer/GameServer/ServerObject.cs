@@ -98,6 +98,7 @@ class Server
         if (typeof(ConnectionStatusPackage) == obj.GetType())
         {
             sender.SendMessage(message);
+            return;
         }
 
         foreach (var client in clients)

@@ -32,8 +32,12 @@ public class PlayerController : MonoBehaviour
         set 
         {
             _health = value;
-            if (value <= 0) OnDeathSequenceEnded();
             UIManager.Instance.UpdateHealthBar();
+            if (health <= 0)
+            {
+                OnDeathSequenceEnded();
+                // Вызов смерти
+            }
         } 
     }
     public Rigidbody2D _rb;
