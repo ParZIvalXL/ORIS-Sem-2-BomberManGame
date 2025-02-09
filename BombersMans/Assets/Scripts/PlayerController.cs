@@ -10,7 +10,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private string _playerNickname;
-    public static PlayerController Instance; 
+    //public static PlayerController Instance; 
     private bool timeOut = false;
     public bool isClient = false;
 
@@ -32,11 +32,22 @@ public class PlayerController : MonoBehaviour
         set 
         {
             _health = value;
-            UIManager.Instance.UpdateHealthBar();
-            if (health <= 0)
+            Debug.Log("setting health " + value + " for " + _playerNickname + " Server pl name " + GameClientScript.Instance.playerName);
+            if(_playerNickname.Equals(GameClientScript.Instance.playerName))
             {
-                OnDeathSequenceEnded();
-                // Вызов смерти
+                UIManager.Instance.UpdateHealthBar();
+                if (health <= 0)
+                {
+                    OnDeathSequenceEnded();
+                    // Вызов смерти
+                }
+            }else
+            {
+                if (health <= 0)
+                {
+                    GameController.Instance.Players.Remove(this);
+                    Destroy(gameObject);
+                }
             }
         } 
     }
@@ -67,7 +78,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        Instance = this;
+        /*if(Instance == null || GameClientScript.Instance.playerName == PlayerNickname)
+            Instance = this;*/
     }
 
     private void FixedUpdate()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NetCode;
 using NetCode.Packages;
 using UnityEngine;
@@ -75,9 +76,12 @@ public class MapBuilder : MonoBehaviour
         {
             Debug.Log("Teleporting player to " + playerPackage.SpawnPositionX + ", " + playerPackage.SpawnPositionY);
             var spawnPoint = new Vector3(playerPackage.SpawnPositionX + 1f, playerPackage.SpawnPositionY + 1f, 0);
-            PlayerController.Instance._rb.position = spawnPoint;
-            PlayerController.Instance.PlayerNickname = playerPackage.Nickname;
-            PlayerController.Instance.transform.position = spawnPoint;
+            var clPlayer = GameClientScript.Instance.clientPlayer;
+            clPlayer._rb.position = spawnPoint;
+            clPlayer.PlayerNickname = playerPackage.Nickname;
+            clPlayer.transform.position = spawnPoint;
+            if(GameController.Instance.Players.All(f => f.PlayerNickname != clPlayer.PlayerNickname))
+                GameController.Instance.Players.Add(clPlayer);
         }
     }
     private void ClearMap()

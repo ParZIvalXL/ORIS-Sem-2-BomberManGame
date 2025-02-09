@@ -31,7 +31,14 @@ public class GameController : MonoBehaviour
     {
         var player = GetPlayer(playerName);
         if (player == null) return;
-        player.gameObject.SetActive(false);
+        if(GameClientScript.Instance.playerName != playerName){
+            Instance.Players.Remove(player);
+            Destroy(player);
+        }
+        else
+        {
+            player.gameObject.SetActive(false);
+        }
     }
     
     [CanBeNull]
@@ -59,12 +66,24 @@ public class GameController : MonoBehaviour
     public void UpdatePlayer(PlayerPackage playerPackage)
     {
         var player = GetPlayer(playerPackage.Nickname);
-        if(!player) 
+        if(player == null) 
             return;
         Debug.Log("Update player " + playerPackage.Nickname + " at " + playerPackage.PositionX + ", " + playerPackage.PositionY + "Found player: " + player.PlayerNickname);
-        player.transform.position = Vector3.Lerp(player.transform.position, new Vector3(playerPackage.PositionX, playerPackage.PositionY, 0), 0.5f);
-        player._rb.position = Vector3.Lerp(player.transform.position, new Vector3(playerPackage.PositionX, playerPackage.PositionY, 0), 0.5f);
-        player.SetDirection(new Vector2(playerPackage.DirectionX, playerPackage.DirectionY));
+        var pos = new Vector3(playerPackage.PositionX, playerPackage.PositionY, 0);
+        if (player.PlayerNickname.Equals(GameClientScript.Instance.playerName))
+        {
+            if (Vector3.Distance(pos, player.transform.position) > 1f)
+            {
+                player.transform.position = Vector3.Lerp(player.transform.position, pos, 0.2f);
+                player._rb.position = Vector3.Lerp(player.transform.position, pos, 0.2f);
+            }
+        }
+        else
+        {
+            player.transform.position = Vector3.Lerp(player.transform.position, pos, 0.2f);
+            player._rb.position = Vector3.Lerp(player.transform.position, pos, 0.2f);
+            player.SetDirection(new Vector2(playerPackage.DirectionX, playerPackage.DirectionY));
+        }
         player.health = playerPackage.Health;
         Debug.Log("player health " + player.health + " Server pl health " + playerPackage.Health);
     }

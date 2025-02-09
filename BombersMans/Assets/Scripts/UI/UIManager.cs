@@ -28,7 +28,8 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealthBar()
     {
-        gameUIScript.SetHealth(PlayerController.Instance.health/100f);
+        Debug.Log("UpdateHealthBar Client player: " + GameClientScript.Instance.clientPlayer.PlayerNickname + " " + GameClientScript.Instance.clientPlayer.health);
+        gameUIScript.SetHealth(GameClientScript.Instance.clientPlayer.health/100f);
     }
 
     public void Blur()

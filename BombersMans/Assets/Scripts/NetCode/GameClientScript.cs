@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +21,14 @@ namespace NetCode
         private string _host = "127.0.0.1";
         private int _port = 8888;
         public static GameClientScript Instance; 
+        public PlayerController clientPlayer;
         public GameObject[] BombsList;
 
         void Awake()
         {
             Instance = this;
+            clientPlayer = GameObject.FindGameObjectsWithTag("Player").Select(f => f.GetComponent<PlayerController>())
+                .First(f => f.isClient);
         }
         public async Task ConnectingPlayer(string name)
         {
@@ -74,7 +78,7 @@ namespace NetCode
             {
                 Debug.Log(e);
             }
-            
+            UIConnectScript.Instance._connectButton.interactable = true;
         }
 
         public async Task ConnectToServer()
