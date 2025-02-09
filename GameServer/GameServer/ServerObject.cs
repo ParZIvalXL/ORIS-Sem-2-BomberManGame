@@ -16,6 +16,8 @@ class Server
     private List<ClientHandler> clients = new List<ClientHandler>();
     private readonly int port;
     public TileType[,]? _map;
+    private bool isRunning = true;
+    public List<PlayerPackage> _playersListPackage = new List<PlayerPackage>();
     public bool IsStarted { get; private set; } = false;
 
     public Server(int port)
@@ -31,12 +33,14 @@ class Server
             listenerSocket.Bind(new IPEndPoint(IPAddress.Any, port));
             listenerSocket.Listen(10);
             Console.WriteLine($"Сервер запущен на {IPAddress.Any}:{port}. Ожидание подключений...");
-            _map = MapsReader.GetMap(File.ReadAllText("Maps.json"));
-            while (true)
+            _map = MapsReader.MirrorMapX(MapsReader.GetMap(File.ReadAllText("Maps.json")));
+
+            while (isRunning) // Используем флаг вместо while(true)
             {
                 var clientSocket = listenerSocket.Accept();
                 var clientHandler = new ClientHandler(clientSocket, this);
                 clients.Add(clientHandler);
+
                 if (clients.Count >= 2)
                 {
                     IsStarted = true;
@@ -46,6 +50,7 @@ class Server
                         ConnectionDescription = "Игра началась"
                     };
                     BroadcastPackage(answerStartedGame, clientHandler);
+
                     if (clients.Count > 4)
                     {
                         var answer = new ConnectionStatusPackage
@@ -55,21 +60,11 @@ class Server
                         };
                         BroadcastPackage(answer, clientHandler);
                         clients.Remove(clientHandler);
-                        clientHandler.Disconnect();
+                        clientHandler.Disconnect(clientHandler);
                     }
                 }
-                
+
                 Task.Run(() => clientHandler.HandleClient());
-                if (!IsStarted)
-                {
-                    IsStarted = false;
-                    var answerEnd = new ConnectionStatusPackage
-                    {
-                        ConnectionState = 101,
-                        ConnectionDescription = "Игра завершилась"
-                    };
-                    BroadcastPackage(answerEnd, clientHandler);
-                }
             }
         }
         catch (SocketException ex)
@@ -88,30 +83,37 @@ class Server
 
     public void BroadcastPackage(object? obj, ClientHandler sender)
     {
-        var message = JsonConvert.SerializeObject(obj);
-        if (typeof(CurrentSession) == obj.GetType() && sender == clients[clients.Count - 1])
+        try
         {
-            sender.SendMessage(message);
-            return;
-        }
-        
-        if (typeof(ConnectionStatusPackage) == obj.GetType())
-        {
-            sender.SendMessage(message);
-            return;
-        }
+            var message = JsonConvert.SerializeObject(obj);
+            if (typeof(CurrentSession) == obj.GetType() && sender == clients[clients.Count - 1])
+            {
+                sender.SendMessage(message);
+                return;
+            }
+            Console.WriteLine(message);
+            if (typeof(ConnectionStatusPackage) == obj.GetType())
+            {
+                sender.SendMessage(message);
+            }
 
-        foreach (var client in clients)
+            foreach (var client in clients.ToList())
+            {
+                try
+                {
+                    client.SendMessage(message);
+                }
+                catch
+                {
+                    RemoveClient(client);
+                    client.Disconnect(client);
+                }
+            }
+        }
+        catch (Exception e)
         {
-            try
-            {
-                client.SendMessage(message);
-            }
-            catch
-            {
-                clients.Remove(client);
-                client.Disconnect();
-            }
+            Console.WriteLine(e + " хуесосы");
+            throw;
         }
     }
     
@@ -121,13 +123,26 @@ class Server
         clients.Remove(client);
     }
 
+
     public void Stop()
     {
+        isRunning = false;
+    
+        try
+        {
+            listenerSocket.Close();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ошибка при закрытии сокета: {ex.Message}");
+        }
+
         foreach (var client in clients)
         {
-            client.Disconnect();
+            client.Disconnect(client);
         }
-        listenerSocket.Close();
+        clients.Clear();
+    
         Console.WriteLine("Сервер остановлен.");
     }
 }

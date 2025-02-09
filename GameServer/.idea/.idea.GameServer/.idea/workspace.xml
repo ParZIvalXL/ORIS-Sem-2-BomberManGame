@@ -8,6 +8,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b8d803f-eda1-4368-a503-ddf856a2c5bb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/PlayerListPackage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/Scripts/Packages/PlayerListPackage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Oswald Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BombersMans/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../BombersMans/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameServer/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameServer/BombScripts.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/BombScripts.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameServer/ClientObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ClientObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameServer/MapUpdater.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/MapUpdater.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameServer/Packages/PlayerListPackage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/Packages/PlayerListPackage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GameServer/ServerObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer/ServerObject.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +38,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="main" />
+        <entry key="$PROJECT_DIR$/.." value="TimurBranch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -47,21 +57,9 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/65b37f26ade0e214e19eb27f8c86af61cda94282812146144885e586a92473/Socket.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../BombersMans/Assets/Scripts/NetCode/GameClientScript.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../BombersMans/Assets/Scripts/PlayerController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/fajzu/OneDrive/Документы/GitHub/ORIS-Sem-2-BomberManGame/GameServer/GameServer/ClientObject.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
   <component name="ProblemsViewState">
@@ -136,6 +134,9 @@
       <workItem from="1738846489154" duration="1222000" />
       <workItem from="1738925193845" duration="3385000" />
       <workItem from="1738945456903" duration="1424000" />
+      <workItem from="1739017406863" duration="8420000" />
+      <workItem from="1739035104028" duration="664000" />
+      <workItem from="1739042448825" duration="1194000" />
     </task>
     <servers />
   </component>
