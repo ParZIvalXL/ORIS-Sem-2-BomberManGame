@@ -13,10 +13,11 @@ using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 class Server
 {
     private Socket listenerSocket;
-    private List<ClientHandler> clients = new List<ClientHandler>();
+    public List<ClientHandler> clients = new List<ClientHandler>();
     private readonly int port;
     public TileType[,]? _map;
     private bool isRunning = true;
+    public List<PlayerPackage> playersInGame = new List<PlayerPackage>();
     public List<PlayerPackage> _playersListPackage = new List<PlayerPackage>();
     public  List<PlayerPackage> _allPlayersList = new List<PlayerPackage>();
     public bool IsStarted { get; private set; } = false;
@@ -86,6 +87,7 @@ class Server
     {
         var message = JsonConvert.SerializeObject(obj);
         clientHandler.SendMessage(message);
+        Console.WriteLine(message);
     }
 
     public void BroadcastPackageAll(object? obj)
@@ -93,7 +95,6 @@ class Server
         try
         {
             var message = JsonConvert.SerializeObject(obj);
-            Console.WriteLine(message);
             foreach (var client in clients.ToList())
             {
                 try

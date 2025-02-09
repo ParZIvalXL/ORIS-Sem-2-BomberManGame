@@ -98,7 +98,14 @@ public class BombScripts
                 player.Health -= 25;
                 if (player.Health == 0)
                 {
-                    
+                    var ans = new PlayerStatus
+                    {
+                        PlayerCode = 0,
+                        PlayerNickname = player.Nickname,
+                        TextStatus = $"Вы были убиты бомбой игрока {playerNickname}"
+                    };
+                    ClientHandler.SendPlayerStatus(ans, player.Nickname);
+                    ClientHandler.server.playersInGame.Remove(player);
                 }
                 
                 for (int i = 0; i < ClientHandler.server._playersListPackage.Count; i++)

@@ -68,6 +68,7 @@ class ClientHandler
             }
 
             server._playersListPackage.Add(newPlayer);
+            server.playersInGame.Add(newPlayer);
 
             var playerConnected = new PlayerConnectionPackage
             {
@@ -116,7 +117,6 @@ class ClientHandler
                         Disconnect(this);
                         break;
                     }
-
                     string mess = Encoding.UTF8.GetString(buffer, 0, receivedBytes);
                     receivedData.Append(mess);
                     while (receivedData.ToString().Contains("\n"))
@@ -153,7 +153,7 @@ class ClientHandler
                                         break;
                                     }
                                 }
-
+                                
                                 if (!timeOut)
                                 {
                                     var playerListPackage = new PlayerListPackage
@@ -186,6 +186,17 @@ class ClientHandler
                                 break;
                             }
                         }
+                    }
+                    if (server.playersInGame.Count == 1 && server.IsStarted)
+                    {
+                        var ans = new PlayerStatus
+                        {
+                            PlayerCode = 1,
+                            PlayerNickname = clientName,
+                            TextStatus = "Вы победили!!!"
+                        };
+                        SendPlayerWin(ans, clientName);
+                        break;
                     }
                 }
                 catch (Exception e)
@@ -251,6 +262,30 @@ class ClientHandler
         catch (Exception ex)
         {
             Console.WriteLine($"Ошибка при отключении {clientName}: {ex.Message}");
+        }
+    }
+
+    public static void SendPlayerStatus(PlayerStatus obj, string playerName)
+    {
+        foreach (var pl in server._playersListPackage)
+        {
+            if (pl.Nickname == playerName)
+            {
+                var client = server.clients.FirstOrDefault(p => p.clientName == playerName);
+                server.BroadcastPackageSingle(obj, client);
+            }
+        }
+    }
+
+    public static void SendPlayerWin(PlayerStatus obj, string playerName)
+    {
+        foreach (var player in server.playersInGame)
+        {
+            if (player.Nickname == playerName)
+            {
+                var client = server.clients.FirstOrDefault(p => p.clientName == playerName);
+                server.BroadcastPackageSingle(obj, client);
+            }
         }
     }
 

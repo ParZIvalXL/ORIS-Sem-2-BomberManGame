@@ -135,7 +135,7 @@ namespace NetCode
                     {
                         string encodedMessage = Encoding.UTF8.GetString(buffer, 0, receivedBytes);
                         string[] messages = encodedMessage.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-                        Debug.Log(encodedMessage);
+                        // Debug.Log(encodedMessage);
                         foreach (var message in messages)
                         {
                             var messageObject = JsonConvert.DeserializeObject<Dictionary<string, object>>(message);
@@ -228,8 +228,8 @@ namespace NetCode
                                     var package = JsonConvert.DeserializeObject<PlayerListPackage>(message);
                                     foreach (var player in package.List)
                                     {
-                                        Debug.Log("player: " + player);
-                                        Debug.Log(player.Nickname + " " + player.PositionX + " " + player.PositionY + " " + player.Health);
+                                        // Debug.Log("player: " + player);
+                                        // Debug.Log(player.Nickname + " " + player.PositionX + " " + player.PositionY + " " + player.Health);
                                         GameController.Instance.AddAction(() =>
                                         {
                                             if(GameController.Instance.GetPlayer(player.Nickname) == null)
@@ -253,6 +253,20 @@ namespace NetCode
                                     });
                                     break;
                                 }
+
+                                case "PlayerStatus":
+                                {
+                                    var package = JsonConvert.DeserializeObject<PlayerStatus>(message);
+                                    if (package.PlayerCode == 0)
+                                    {
+                                        
+                                    }
+                                    else
+                                    {
+                                        
+                                    }
+                                    break;
+                                }
                                 default:
                                 {
                                     break;
@@ -272,7 +286,7 @@ namespace NetCode
         {
             var prefix = messagePackage.Sender == null ? messagePackage.Sender + ": " : "";
             string message = prefix + messagePackage.Content;
-            Debug.Log(message);
+            // Debug.Log(message);
             if(ChatScript.Instance != null)
                 ChatScript.Instance.CreateNewMessage(message);
         }

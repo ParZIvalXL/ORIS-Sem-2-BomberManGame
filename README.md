@@ -1,1 +1,11 @@
 # ORIS_2_SemWork_Faizullin_Khafizov
+
+Инструкция по запуску игры:
+
+1. Запуск сервера:
+	1. Открыть GameServer.sln и запустить сервер в редакторе кода
+	2. Пройти по пути \GameServer\GameServer\bin\Debug\net9.0\ и запустить GameServer.exe
+
+2. Запуск игры:
+	1. Открыть папку BombersMansBuild
+	2. Запустить файл BomberMan.exe
