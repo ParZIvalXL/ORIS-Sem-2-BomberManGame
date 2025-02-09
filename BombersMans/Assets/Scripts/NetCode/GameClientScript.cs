@@ -291,11 +291,10 @@ namespace NetCode
         
         private static void SendMessage(MessagePackage messagePackage)
         {
-            var prefix = messagePackage.Sender == null ? messagePackage.Sender + ": " : "";
-            string message = prefix + messagePackage.Content;
+            string message = messagePackage.Content;
             // Debug.Log(message);
             if(ChatScript.Instance != null)
-                ChatScript.Instance.CreateNewMessage(message);
+                ChatScript.Instance.CreateNewMessage(message, messagePackage.Sender);
         }
         
         public async void SendBombPackage(Vector2 position)

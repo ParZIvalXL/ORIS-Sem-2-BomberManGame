@@ -42,10 +42,15 @@ public class ChatScript : MonoBehaviour
             _connectButton.onClick.AddListener(SendChatMessage);
         }
 
-        public void CreateNewMessage(string message)
+        public void CreateNewMessage(string message, string sender)
         {
+            string prefix = "";
+            if (sender is null || sender.Length == 0)
+                prefix = "";
+            else
+                prefix = $"{sender}: ";
             // if(message.Length == 0) return;
-            textMessage.text += message;
+            textMessage.text += $"{prefix}{message}\n";
         }
 
         public void Awake()

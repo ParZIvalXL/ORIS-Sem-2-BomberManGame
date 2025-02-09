@@ -105,4 +105,9 @@ public class UIManager : MonoBehaviour
         Instance = this;
         if(loadingUI.animator is null || LoadingUI.Instance is null) loadingUI.SetUp();
     }
+
+    public void CloseGame()
+    {
+        Application.Quit();
+    }
 }

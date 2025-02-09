@@ -11537,7 +11537,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1223188650}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1629516652}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: CloseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1223188650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12330,6 +12342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: 
+  clientPlayer: {fileID: 0}
   BombsList:
   - {fileID: 8428550871280504196, guid: 90351259bb8929e43b4442ddb33f4beb, type: 3}
 --- !u!4 &1527305504
