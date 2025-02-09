@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
     public async Task StartTimeOut()
     {
         timeOut = true;
-        await Task.Delay(250);
+        await Task.Delay(50);
         timeOut = false;
     }
 }
