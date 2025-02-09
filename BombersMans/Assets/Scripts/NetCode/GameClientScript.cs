@@ -157,11 +157,6 @@ namespace NetCode
                                 {
                                     CurrentSession currentSession =
                                         JsonConvert.DeserializeObject<CurrentSession>(message);
-                                    ChatHolder.AddMessage(new MessagePackage
-                                    {
-                                        Sender = "Server",
-                                        Content = "Карта загружена",
-                                    });
                                     GameController.Instance.AddAction(() =>
                                     {
                                         UIManager.Instance.loadingUI.SetText("Карта загружена! Сейчас все расставим и можно играть!");
@@ -179,11 +174,6 @@ namespace NetCode
                                 {
                                     PlayerPackage playerPackage = JsonConvert.DeserializeObject<PlayerPackage>(message);
                                     Debug.Log($"Игрок {playerPackage.Nickname} появился на позиции X: {playerPackage.SpawnPositionX}, Y:{playerPackage.SpawnPositionY}");
-                                    ChatHolder.AddMessage(new MessagePackage
-                                    {
-                                        Sender = "Server",
-                                        Content = $"Игрок {playerPackage.Nickname} появился на позиции X: {playerPackage.SpawnPositionX}, Y:{playerPackage.SpawnPositionY}"
-                                    });
                                     GameController.Instance.AddAction(() =>
                                     {
                                         MapBuilder.Instance.CreatePlayer(playerPackage);

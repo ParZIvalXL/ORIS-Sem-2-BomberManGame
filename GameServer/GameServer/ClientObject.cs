@@ -33,27 +33,41 @@ class ClientHandler
             int recB = clientSocket.Receive(buff);
             clientName = Encoding.UTF8.GetString(buff, 0, recB).Trim();
             Console.WriteLine($"{clientName} подключился к игре.");
-            bool playerExists = server._playersListPackage.Any(p =>
-            {
-                return p != null && p.Nickname == clientName;
-            });
-
-            if (!playerExists)
-            {
-                server._playersListPackage.Add(new PlayerPackage
-                {
-                    Nickname = clientName,
-                });
-            }
-            else
+            bool playerExists = server._playersListPackage.Any(p => p != null && p.Nickname == clientName);
+            if (playerExists)
             {
                 var answer = new ConnectionStatusPackage
                 {
                     ConnectionState = 404,
                     ConnectionDescription = "Такой игрок уже есть"
                 };
-                server.BroadcastPackage(answer, this);
+                server.BroadcastPackageSingle(answer, this);
+                Disconnect(this);
+                return;
             }
+            
+            var existingPlayer = server._allPlayersList.FirstOrDefault(p => p.Nickname == clientName);
+            PlayerPackage newPlayer;
+            if (existingPlayer != null)
+            {
+                newPlayer = new PlayerPackage
+                {
+                    Nickname = existingPlayer.Nickname,
+                    PositionX = existingPlayer.PositionX,
+                    PositionY = existingPlayer.PositionY,
+                    Health = existingPlayer.Health,
+                };
+            }
+            else
+            {
+                newPlayer = new PlayerPackage
+                {
+                    Nickname = clientName,
+                };
+                server._allPlayersList.Add(newPlayer);
+            }
+
+            server._playersListPackage.Add(newPlayer);
 
             var playerConnected = new PlayerConnectionPackage
             {
@@ -79,17 +93,17 @@ class ClientHandler
                 grid = server._map,
                 Type = nameof(CurrentSession)
             };
-            server.BroadcastPackage(newClient, this);
-            server.BroadcastPackage(spawnPlayerPackage, this);
-            server.BroadcastPackage(curentSession, this);
+            server.BroadcastPackageAll(newClient);
+            server.BroadcastPackageSingle(spawnPlayerPackage, this);
+            server.BroadcastPackageSingle(curentSession, this);
 
             var connectionStatusPackage = new ConnectionStatusPackage
             {
                 ConnectionState = (int)ConnectionState.Successful,
                 ConnectionDescription = ConnectionState.Successful.ToString()
             };
-            server.BroadcastPackage(connectionStatusPackage, this);
-            server.BroadcastPackage(playerConnected, this);
+            server.BroadcastPackageSingle(connectionStatusPackage, this);
+            server.BroadcastPackageAll(playerConnected);
 
             while (true)
             {
@@ -129,6 +143,16 @@ class ClientHandler
                                         break;
                                     }
                                 }
+                                for (int i = 0; i < server._allPlayersList.Count; i++)
+                                {
+                                    if (server._allPlayersList[i] != null && server._allPlayersList[i].Nickname == package.Nickname)
+                                    {
+                                        server._allPlayersList[i].PositionX = package.PositionX;
+                                        server._allPlayersList[i].PositionY = package.PositionY;
+
+                                        break;
+                                    }
+                                }
 
                                 if (!timeOut)
                                 {
@@ -137,7 +161,7 @@ class ClientHandler
                                         Type = "PlayersList",
                                         List = server._playersListPackage
                                     };
-                                    server.BroadcastPackage(playerListPackage, this);
+                                    server.BroadcastPackageAll(playerListPackage);
                                     StartTimeOut();
                                 }
 
@@ -147,7 +171,7 @@ class ClientHandler
                             {
                                 MessagePackage? package = JsonConvert.DeserializeObject<MessagePackage>(json);
                                 Console.WriteLine($"{package.Sender}: {package.Content}");
-                                server.BroadcastPackage(package, this);
+                                server.BroadcastPackageAll(package);
                                 break;
                             }
                             case "BombPackage":
@@ -157,8 +181,8 @@ class ClientHandler
                                     $"Игрок {package.playerNickname} поставил бомбу {package.BombType} " +
                                     $"по координатам X:{package.PositionX}, Y:{package.PositionY}");
                                 MapUpdater.SetBomb(server._map, package);
-                                server.BroadcastPackage(curentSession, this);
-                                server.BroadcastPackage(package, this);
+                                server.BroadcastPackageAll(curentSession);
+                                server.BroadcastPackageAll(package);
                                 break;
                             }
                         }
@@ -206,7 +230,7 @@ class ClientHandler
                 Type = nameof(PlayerConnectionPackage)
             };
 
-            server.BroadcastPackage(answer, this);
+            server.BroadcastPackageAll(answer);
             connected = false;
             foreach (var player in server._playersListPackage.ToList())
             {
