@@ -7,7 +7,7 @@
 	2. Пройти по пути \GameServer\GameServer\bin\Debug\net9.0\ и запустить GameServer.exe
 
 2. Запуск игры:
-	1. Открыть папку BombersMansBuild
+	1. Открыть папку BombersMansBuild в папке BombersMans
 	2. Запустить файл BomberMan.exe
 
 
