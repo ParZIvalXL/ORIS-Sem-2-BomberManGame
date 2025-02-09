@@ -219,6 +219,7 @@ namespace NetCode
                                         {
                                             bombScript.GetComponent<BombScript>().playerName = bombPackage.playerNickname;
                                         }
+                                        GameController.Instance.AddBomb(bombScript);
                                     });
 
                                     break;
@@ -257,14 +258,20 @@ namespace NetCode
                                 case "PlayerStatus":
                                 {
                                     var package = JsonConvert.DeserializeObject<PlayerStatus>(message);
-                                    if (package.PlayerCode == 0)
+                                    if (package.PlayerNickname != GameClientScript.Instance.playerName) return;
+                                    GameController.Instance.AddAction(() =>
                                     {
-                                        
-                                    }
-                                    else
-                                    {
-                                        
-                                    }
+                                        if (package.PlayerCode == 0)
+                                        {
+                                            UIManager.Instance.ShowGameOver(package.TextStatus,
+                                                PlayerGameEndReason.DeadByEnemy);
+                                        }
+                                        else
+                                        {
+                                            UIManager.Instance.ShowGameOver(package.TextStatus,
+                                                PlayerGameEndReason.Winner);
+                                        }
+                                    });
                                     break;
                                 }
                                 default:

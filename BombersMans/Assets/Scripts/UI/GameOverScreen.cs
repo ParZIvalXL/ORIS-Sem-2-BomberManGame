@@ -13,6 +13,7 @@ public class GameOverScreen : MonoBehaviour
         if (winner)
         {
             Title.text = "Victory!";
+            Title.color = new Color(198, 255, 219);
         }
 
         Description.text = description;

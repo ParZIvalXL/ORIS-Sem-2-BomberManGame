@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using NetCode;
 using NetCode.Packages;
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
 
     public void SpawnBomb(int index)
     {
+        if(GameController.Instance.Bombs.Count(b => b.playerName == GameClientScript.Instance.playerName) >= 4) return;
         var spawnPosition = GetIntPosition();
         //var bomb = Instantiate(Bombs[index], spawnPosition, Quaternion.identity);
         //if (bomb.TryGetComponent<BombScript>(out var bombScript))
@@ -118,7 +120,6 @@ public class PlayerController : MonoBehaviour
     private void OnDeathSequenceEnded()
     {
         gameObject.SetActive(false);
-        UIManager.Instance.ShowGameOver("Вы были убиты бомбой... ", PlayerGameEndReason.DeadByHimself);
         // Вызов проверки состояния игры для текущего игрока (проиграл, причина смерти, победа, и т.д.)
     }
 

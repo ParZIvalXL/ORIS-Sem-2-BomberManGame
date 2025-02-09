@@ -68,7 +68,8 @@ public class BombScript : MonoBehaviour
             
             
         }
-        
+
+        GameController.Instance.Bombs.Remove(this);
         Destroy(gameObject);
     }
 
